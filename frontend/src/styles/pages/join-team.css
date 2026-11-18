@@ -1,0 +1,46 @@
+/* Join the ResRef team page (/join). Builds on brand-ui.css and public-forms.css. */
+
+/* Team cards */
+.rp-join-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: clamp(36px, 4vw, 52px); }
+.resref-page .rp-join-card { flex: 0 1 calc((100% - 40px) / 3); position: relative; display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: 28px; border: 1px solid var(--rh-line); border-radius: var(--rh-radius); background: #fff; box-shadow: var(--rh-shadow-sm); color: var(--rh-ink); text-decoration: none; overflow: hidden; isolation: isolate; transition: transform .35s var(--rh-ease), box-shadow .35s ease, border-color .35s ease; }
+.resref-page .rp-join-card::after { content: ''; position: absolute; inset: 0 0 auto; height: 3px; background: var(--rh-gradient); transform: scaleX(0); transform-origin: left; transition: transform .45s var(--rh-ease); }
+.resref-page .rp-join-card:hover { color: var(--rh-ink); border-color: rgba(18, 106, 198, .3); box-shadow: var(--rh-shadow); }
+.resref-page .rp-join-card:hover::after {transform: scaleX(1); }
+.rh-motion .rp-join-card[data-reveal].is-revealed { transition: opacity .8s var(--rh-ease), transform .35s var(--rh-ease), box-shadow .35s ease, border-color .35s ease; transition-delay: var(--rh-delay, 0ms), 0ms, 0ms, 0ms; }
+.rh-motion .rp-join-card[data-reveal].is-revealed:hover { }
+.rp-join-card .rh-card-icon { margin-bottom: 4px; }
+.rp-join-card:hover .rh-card-icon { background: var(--rh-gradient); color: #fff; }
+.resref-page .rp-join-card h3 { margin: 0; color: var(--rh-ink); font: 400 1.32rem/1.2 var(--rh-serif); }
+.resref-page .rp-join-card p { margin: 0; color: var(--rh-copy); font-size: .96rem; line-height: 1.62; }
+.rp-join-card-action { display: inline-flex; align-items: center; gap: 7px; margin-top: auto; padding-top: 10px; color: var(--rh-blue); font: 700 .88rem/1 var(--rh-sans); }
+.rp-join-card-action svg { transition: transform .25s var(--rh-ease); }
+.rp-join-card:hover .rp-join-card-action svg { transform: translateX(3px); }
+.resref-page .rp-join-card.is-soon:hover { border-color: var(--rh-line); box-shadow: var(--rh-shadow-sm); }
+.resref-page .rp-join-card.is-soon:hover::after { transform: scaleX(0); }
+.rp-join-card.is-soon:hover .rh-card-icon { background: var(--rh-ice); color: var(--rh-blue); }
+.rp-join-card.is-soon .rp-join-card-action { color: var(--rh-copy); font-weight: 600; }
+
+/* Application */
+
+@media (max-width: 1024px) {
+  .resref-page .rp-join-card { flex-basis: calc((100% - 20px) / 2); }
+}
+
+@media (max-width: 680px) {
+  .rp-join-grid { gap: 14px; }
+  .resref-page .rp-join-card { flex-basis: 100%; padding: 22px; }
+}
+
+/* What to expect: a quiet strip after the team cards */
+.resref-page .rp-join-expect h2 { margin: 0; color: var(--rh-navy); text-align: center; }
+.rp-join-expect ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); margin: clamp(24px, 3vw, 36px) 0 0; padding: 0; list-style: none; }
+.rp-join-expect li { display: flex; gap: 14px; align-items: flex-start; min-width: 0; }
+.rp-join-expect li > div { display: grid; gap: 4px; min-width: 0; }
+.rp-join-expect .rh-card-icon { flex: none; background: #fff; }
+.resref-page .rp-join-expect h3 { margin: 0; color: var(--rh-navy); font: 600 1.05rem/1.3 var(--rh-sans); }
+.resref-page .rp-join-expect li p { margin: 0; color: var(--rh-copy); font-size: .95rem; line-height: 1.55; }
+.resref-page .rp-join-expect-help { margin: clamp(24px, 3vw, 36px) 0 0; color: var(--rh-copy); text-align: center; }
+.resref-page .rp-join-expect-help a { color: var(--rh-blue); font-weight: 600; }
+@media (max-width: 760px) {
+  .rp-join-expect ul { grid-template-columns: minmax(0, 1fr); }
+}

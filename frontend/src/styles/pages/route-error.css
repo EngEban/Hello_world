@@ -1,0 +1,18 @@
+/* Route error state (errorElement). Works inside the public layout and on its own. */
+.rp-route-error { position: relative; isolation: isolate; display: grid; min-height: 72vh; place-items: center; padding: clamp(40px, 8vw, 96px) 16px; background: radial-gradient(60% 70% at 85% 0%, rgba(79, 185, 252, .16), transparent 60%), linear-gradient(180deg, var(--rh-mist), #fff); font-family: var(--rh-sans); }
+.rp-route-error::before { content: ''; position: absolute; inset: 0; z-index: -1; background-image: radial-gradient(rgba(18, 106, 198, .09) 1px, transparent 1.2px); background-size: 24px 24px; mask-image: radial-gradient(ellipse at 50% 30%, #000, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000, transparent 70%); }
+.rp-route-error .rp-route-error-card { display: grid; justify-items: center; gap: 14px; width: min(100%, 560px); padding: clamp(28px, 5vw, 48px); border: 1px solid var(--rh-line); border-radius: var(--rh-radius-lg); background: #fff; color: var(--rh-ink); text-align: center; box-shadow: var(--rh-shadow-lg); }
+.rp-route-error-icon { width: 60px; height: 60px; display: grid; place-items: center; border-radius: var(--rr-radius-card); background: var(--rh-gradient); color: #fff; box-shadow: 0 12px 26px rgba(18, 106, 198, .28); }
+.rp-route-error .route-error-eyebrow { color: var(--rh-blue); font: 700 .74rem/1.2 var(--rh-sans); letter-spacing: .14em; text-transform: uppercase; }
+.rp-route-error .rp-route-error-card h1 { margin: 0; color: var(--rh-ink); font: 400 clamp(1.8rem, 1.4rem + 1.4vw, 2.4rem)/1.12 var(--rh-serif); letter-spacing: -.015em; }
+.rp-route-error .rp-route-error-card p { max-width: 44ch; margin: 0 0 8px; color: var(--rh-copy); font-size: 1.02rem; line-height: 1.7; }
+.rp-route-error .route-error-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.rp-route-error .route-error-actions .button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 22px; border: 1px solid transparent; border-radius: 999px; font: 700 .9rem/1 var(--rh-sans); text-decoration: none; cursor: pointer; transition: transform .25s var(--rh-ease), background-position .3s ease, box-shadow .25s ease, border-color .25s ease; }
+.rp-route-error .route-error-actions .rp-route-error-primary { background: var(--rh-gradient); background-size: 160% 100%; color: #fff; box-shadow: 0 10px 24px rgba(18, 106, 198, .26); }
+.rp-route-error .route-error-actions .rp-route-error-primary:hover { color: #fff; background-position: 100% 0; }
+.rp-route-error .route-error-actions .rp-route-error-secondary { background: #fff; color: var(--rh-navy); border-color: var(--rh-line); box-shadow: none; }
+.rp-route-error .route-error-actions .rp-route-error-secondary:hover { color: var(--rh-navy); border-color: var(--rh-blue); }
+.rp-route-error :is(a, button):focus-visible { outline: 3px solid var(--rh-sky); outline-offset: 3px; }
+@media (max-width: 480px) {
+  .rp-route-error .route-error-actions .button { width: 100%; }
+}

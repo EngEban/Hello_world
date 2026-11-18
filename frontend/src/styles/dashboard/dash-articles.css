@@ -1,0 +1,441 @@
+/*
+ * Articles & Pages workspace (library + editor + preview). Scoped to the dashboard
+ * root (.rh-dash); loads after dashboard-brand.css / dashboard-ui.css and overrides
+ * the legacy article-* rules where the new layout differs.
+ */
+.rh-dash {
+  /* ================================================================ library */
+  & .dart-library { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  & .dart-topline { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+  & .dart-type-switch { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--rhd-line); border-radius: 999px; background: #fff; }
+  & .dart-type-switch button { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 0 14px; border: 0; border-radius: 999px; background: transparent; color: var(--rhd-text); font: 600 .84rem/1 var(--rh-sans); cursor: pointer; }
+  & .dart-type-switch button:hover { background: var(--rhd-hover); color: var(--rh-blue); }
+  & .dart-type-switch button[aria-pressed=true] { background: var(--rhd-badge); color: #fff; box-shadow: 0 6px 14px rgba(18, 106, 198, .22); }
+  & .dart-type-switch button:focus-visible, & .dart-status-tabs button:focus-visible, & .dart-attention button:focus-visible { outline: none; box-shadow: var(--rhd-focus); }
+  & .dart-status-tabs { margin: 0; flex: 1 1 auto; min-width: 0; }
+
+  & .dart-attention { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px; border: 1px solid var(--rhd-line); border-radius: var(--rhd-radius); background: linear-gradient(180deg, #fff, #fbfdff); }
+  & .dart-attention-label { display: inline-flex; align-items: center; gap: 7px; margin-right: 4px; color: var(--rh-ink); font: 700 .74rem/1 var(--rh-sans); letter-spacing: .08em; text-transform: uppercase; }
+  & .dart-attention-label svg { color: #d97706; }
+  & .dart-attention button { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; padding: 0 6px 0 12px; border: 1px solid var(--rhd-line); border-radius: 999px; background: #fff; color: var(--rhd-text); font: 500 .82rem/1 var(--rh-sans); cursor: pointer; transition: border-color .15s ease, background .15s ease; }
+  & .dart-attention button span { min-width: 24px; padding: 3px 7px; border-radius: 999px; background: var(--rhd-line-soft); color: var(--rhd-muted); font-size: .72rem; font-weight: 700; text-align: center; font-variant-numeric: tabular-nums; }
+  & .dart-attention button.has-items span { background: #fff4e0; color: #92400e; }
+  & .dart-attention button:hover { border-color: #b4d5f2; background: var(--rhd-hover); }
+  & .dart-attention button[aria-pressed=true] { border-color: var(--rh-navy); background: var(--rh-navy); color: #fff; }
+  & .dart-attention button[aria-pressed=true] span { background: rgba(255, 255, 255, .2); color: #fff; }
+
+  & .dart-panel { overflow: visible; padding: 0; }
+  & .dart-toolbar { display: grid; grid-template-columns: minmax(220px, 1.6fr) repeat(3, minmax(140px, 1fr)) auto; gap: 10px; align-items: center; padding: 16px 18px; border-bottom: 1px solid var(--rhd-line-soft); }
+  & .dart-toolbar select { min-height: 42px; }
+  & .dart-toolbar > * { width: 100%; min-width: 0; max-width: none; }
+  & .dart-search { display: flex; align-items: center; gap: 6px; min-height: 42px; padding: 0 6px 0 12px; color: var(--rhd-muted); }
+  & .dart-search input { flex: 1; min-width: 0; min-height: 38px; padding: 0; background: transparent; }
+  & .dart-search button { width: 32px; height: 32px; display: grid; place-items: center; flex: none; padding: 0; border: 0; border-radius: 9px; background: transparent; color: var(--rhd-muted); cursor: pointer; }
+  & .dart-search button:hover { background: var(--rhd-hover); color: var(--rh-blue); }
+  & .dart-filter-button { min-height: 42px; white-space: nowrap; }
+  & .dart-filter-button.is-open { border-color: var(--rh-blue); color: var(--rh-blue); background: var(--rhd-selected); }
+  & .dart-advanced { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)) auto; gap: 12px; align-items: end; margin: 0; padding: 14px 18px; border-bottom: 1px solid var(--rhd-line-soft); background: #f8fbff; }
+  & .dart-advanced label { display: grid; gap: 6px; margin: 0; color: var(--rhd-muted); font: 600 .74rem/1.2 var(--rh-sans); letter-spacing: .04em; text-transform: uppercase; }
+  & .dart-advanced :is(select, input) { min-height: 40px; text-transform: none; letter-spacing: 0; }
+
+  & .dart-chip-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 18px; padding: 12px 18px 0; }
+  & .dart-active-filters, & .dart-saved-views { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  & .dart-saved-views > span { color: var(--rhd-muted); font: 600 .74rem/1 var(--rh-sans); letter-spacing: .06em; text-transform: uppercase; margin-right: 2px; }
+  & .dart-filter-chip, & .dart-view-chip { display: inline-flex; align-items: center; gap: 4px; padding: 4px 4px 4px 11px; border-radius: 999px; background: var(--rhd-selected); color: var(--rh-ink); font: 600 .78rem/1.2 var(--rh-sans); }
+  & .dart-view-chip { padding-left: 0; background: #fff; border: 1px solid var(--rhd-line); }
+  & .dart-view-chip button:first-child { width: auto; height: auto; padding: 4px 4px 4px 11px; border-radius: 999px; color: var(--rhd-text); font: inherit; }
+  & .dart-view-chip button:first-child:hover { color: var(--rh-blue); background: transparent; }
+  & :is(.dart-filter-chip, .dart-view-chip) button { width: 22px; height: 22px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--rhd-muted); cursor: pointer; }
+  & :is(.dart-filter-chip, .dart-view-chip) button:hover { background: #fff; color: #b42318; }
+  & :is(.dart-filter-chip, .dart-view-chip) button:focus-visible { outline: none; box-shadow: var(--rhd-focus); }
+  & .dart-link-button { display: inline-flex; align-items: center; gap: 6px; padding: 4px 6px; border: 0; background: none; color: var(--rh-blue); font: 600 .8rem/1.2 var(--rh-sans); cursor: pointer; border-radius: 8px; }
+  & .dart-link-button:hover { color: var(--rh-navy); text-decoration: underline; text-underline-offset: 3px; }
+  & .dart-link-button:focus-visible { outline: none; box-shadow: var(--rhd-focus); }
+
+  & .dart-context { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 18px; color: var(--rhd-muted); font-size: .84rem; }
+  & .dart-context .dash-icon-button { width: 32px; height: 32px; }
+
+  & .dart-table-wrap { overflow: visible; }
+  & .dart-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+  & .dart-table th { padding: 10px 12px; text-align: left; white-space: nowrap; }
+  & .dart-table td { padding: 12px; vertical-align: middle; border-top: 1px solid var(--rhd-line-soft); word-break: normal; overflow-wrap: normal; hyphens: manual; }
+  & .dart-table .dart-cell-ready, & .dart-table .dart-cell-status { white-space: nowrap; }
+  & .dart-table .dart-cell-meta { min-width: 96px; max-width: 170px; }
+  & .dart-table .dart-col-check, & .dart-table .dart-cell-check { width: 44px; padding-left: 18px; }
+  & .dart-table .dart-col-actions { width: 1%; }
+  & .dart-row-title { display: flex; align-items: center; gap: 12px; min-width: 260px; }
+  & .dart-row-title > img, & .dart-row-title > .article-thumbnail-empty { width: 56px; height: 42px; flex: none; object-fit: cover; display: grid; place-items: center; border-radius: 10px; }
+  & .dart-row-title > div { display: grid; gap: 3px; min-width: 0; }
+  & .dart-row-title button { padding: 0; border: 0; background: none; color: var(--rh-ink); font: 600 .92rem/1.35 var(--rh-sans); text-align: left; cursor: pointer; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  & .dart-row-title button:hover { color: var(--rh-blue); }
+  & .dart-row-title button:focus-visible { outline: none; box-shadow: var(--rhd-focus); border-radius: 6px; }
+  & .dart-row-title small { display: flex; align-items: center; gap: 8px; overflow: hidden; color: var(--rhd-muted); font-size: .76rem; text-overflow: ellipsis; white-space: nowrap; }
+  & .dart-featured { display: inline-flex; align-items: center; gap: 3px; padding: 1px 7px; border-radius: 999px; background: #fff4e0; color: #92400e; font-weight: 700; font-size: .68rem; }
+  & .dart-cell-status small { display: block; margin-top: 4px; color: var(--rhd-muted); font-size: .74rem; white-space: nowrap; }
+  & .dart-cell-meta { color: var(--rhd-text); font-size: .84rem; }
+  & .dart-table td.article-date { white-space: nowrap; }
+  & .dart-table td.article-date small { display: block; color: var(--rhd-muted); font-size: .74rem; }
+  & .dart-row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 4px; }
+  & .dart-row-actions .dash-icon-button { width: 32px; height: 32px; border-color: transparent; background: transparent; color: var(--rhd-muted); }
+  & .dart-row-actions .dash-icon-button:hover { border-color: var(--rhd-line); background: #fff; color: var(--rh-blue); }
+  & .dart-row-actions .dash-action-menu-list { z-index: 45; }
+
+  /* readiness dots + tooltip */
+  & .dart-ready { position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 4px 6px; border-radius: 8px; cursor: help; }
+  & .dart-ready:focus-visible { outline: none; box-shadow: var(--rhd-focus); }
+  & .dart-ready-dots { display: inline-flex; gap: 3px; }
+  & .dart-ready-dots i { width: 8px; height: 8px; border-radius: 50%; background: #dbe3ee; }
+  & .dart-ready.is-ready .dart-ready-dots i.is-done { background: #16a34a; }
+  & .dart-ready.is-close .dart-ready-dots i.is-done { background: var(--rh-blue); }
+  & .dart-ready.is-low .dart-ready-dots i.is-done { background: #f59e0b; }
+  & .dart-ready small { color: var(--rhd-muted); font: 600 .74rem/1 var(--rh-sans); font-variant-numeric: tabular-nums; }
+  & .dart-ready-tip { position: absolute; top: calc(100% + 6px); left: 0; z-index: 30; display: none; min-width: 220px; padding: 10px 12px; border: 1px solid var(--rhd-line); border-radius: 12px; background: #fff; box-shadow: 0 18px 44px rgba(6, 43, 128, .16); cursor: default; }
+  & .dart-ready:is(:hover, :focus-visible) .dart-ready-tip { display: grid; gap: 6px; }
+  & .dart-ready-tip strong { color: var(--rh-ink); font: 600 .82rem/1.3 var(--rh-sans); }
+  & .dart-ready-tip span { display: flex; align-items: center; gap: 7px; color: #92400e; font-size: .8rem; }
+  & .dart-ready-tip span.is-done { color: var(--rhd-muted); }
+  & .dart-ready-tip span.is-done svg { color: #16a34a; }
+
+  & .dart-skeleton-row td { padding: 16px 18px; }
+  & .dart-skeleton-row span { display: block; height: 12px; border-radius: 6px; background: linear-gradient(90deg, #eef3f9 0%, #f8fbff 50%, #eef3f9 100%); background-size: 200% 100%; animation: dash-sheen 1.3s linear infinite; }
+  & .dart-skeleton-row span + span { width: 40%; margin-top: 8px; }
+
+  & .dart-empty { display: grid; justify-items: center; gap: 8px; padding: 48px 20px 52px; text-align: center; }
+  & .dart-empty-icon { width: 56px; height: 56px; display: grid; place-items: center; border-radius: 16px; background: var(--rh-gradient-soft); color: var(--rh-blue); }
+  & .dart-empty h2 { margin: 6px 0 0; color: var(--rh-ink); font: 400 1.35rem/1.2 var(--rh-serif); }
+  & .dart-empty p { max-width: 440px; margin: 0; color: var(--rhd-muted); }
+  & .dart-empty-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 6px; }
+  & .dart-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 18px; border-top: 1px solid var(--rhd-line-soft); color: var(--rhd-muted); font-size: .82rem; }
+  & .dart-footer label { display: inline-flex; align-items: center; gap: 8px; margin: 0; }
+  & .dart-footer select { min-height: 36px; width: auto; }
+
+  & .dart-bulk-bar { position: sticky; bottom: 16px; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0; padding: 10px 12px 10px 16px; border: 1px solid #cfe3f7; border-radius: 16px; background: rgba(255, 255, 255, .96); backdrop-filter: blur(10px); box-shadow: 0 18px 44px rgba(6, 43, 128, .18); }
+  & .dart-bulk-bar strong { color: var(--rh-ink); font: 600 .9rem/1.2 var(--rh-sans); margin-right: auto; }
+  & .dart-bulk-bar strong small { color: var(--rhd-muted); font-weight: 400; }
+  & .dart-bulk-quick { display: flex; flex-wrap: wrap; gap: 6px; }
+  & .dart-bulk-quick .admin-button { min-height: 36px; padding: 0 12px; font-size: .82rem; }
+  & .dart-bulk-bar select { width: auto; min-height: 36px; }
+
+  /* dialogs (library + editor schedule) */
+  & .dart-dialog { width: min(480px, calc(100vw - 32px)); padding: 22px; }
+  & .dart-dialog header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+  & .dart-dialog h2 { margin: 0; }
+  & .dart-dialog p { color: var(--rhd-text); line-height: 1.55; }
+  & .dart-dialog label { display: grid; gap: 6px; margin-top: 10px; font-weight: 600; }
+  & .dart-dialog label small { color: var(--rhd-muted); font-weight: 400; }
+  & .dart-dialog footer { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-top: 18px; }
+
+  /* ================================================================ editor */
+  & .dart-editor { --dart-head: 72px; }
+  & .dart-editor-head { position: sticky; top: var(--rhd-topbar); z-index: 25; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; min-height: var(--dart-head); margin: -8px 0 18px; padding: 10px 0; border-bottom: 1px solid var(--rhd-line); background: color-mix(in srgb, var(--rhd-bg) 92%, transparent); backdrop-filter: blur(10px); }
+  & .dart-editor-head-main { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  & .dart-back { display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; border: 1px solid var(--rhd-line); border-radius: 10px; background: #fff; font: 600 .82rem/1 var(--rh-sans); cursor: pointer; white-space: nowrap; }
+  & .dart-back:hover { border-color: var(--rh-blue); }
+  & .dart-back:focus-visible { outline: none; box-shadow: var(--rhd-focus); }
+  & .dart-editor-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; min-width: 0; }
+  & .dart-editor-heading h1 { margin: 0; color: var(--rh-ink); font: 400 clamp(1.4rem, 1.1rem + .8vw, 1.8rem)/1.15 var(--rh-serif); letter-spacing: -.01em; }
+  & .dart-save-state { display: inline-flex; align-items: center; gap: 6px; color: #15803d; font: 600 .78rem/1 var(--rh-sans); }
+  & .dart-save-state::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+  & .dart-save-state.has-changes { color: #b45309; }
+  & .dart-editor-head-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  & .dart-editor-form { display: grid; gap: 14px; margin: 0; padding: 0; border: 0; background: none; box-shadow: none; }
+  & .dart-editor-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+  & .dart-editor-grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 20px; align-items: start; }
+  & .dart-editor-main { display: grid; gap: 14px; min-width: 0; }
+  & .dart-editor-side { position: sticky; top: calc(var(--rhd-topbar) + var(--dart-head) + 12px); display: grid; gap: 14px; max-height: calc(100vh - var(--rhd-topbar) - var(--dart-head) - 24px); overflow-y: auto; overscroll-behavior: contain; padding: 2px; margin: -2px; scrollbar-width: thin; }
+
+  & .dart-card { display: grid; gap: 14px; padding: 18px 20px; border: 1px solid var(--rhd-line); border-radius: var(--rhd-radius); background: #fff; box-shadow: var(--rhd-shadow); }
+  & .dart-card label { display: grid; gap: 6px; margin: 0; color: var(--rhd-text); font: 600 .84rem/1.3 var(--rh-sans); }
+  & .dart-card label > small, & .dart-section-body label > small { color: var(--rhd-muted); font: 400 .76rem/1.4 var(--rh-sans); }
+  & .dart-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  & .dart-card-head h2 { display: inline-flex; align-items: center; gap: 8px; margin: 0; color: var(--rh-ink); font: 600 .95rem/1.2 var(--rh-sans); }
+  & .dart-card-head h2 svg { color: var(--rh-blue); }
+  & .dart-card-head > span { color: var(--rhd-muted); font-size: .8rem; }
+
+  & .dart-title-field > span { color: var(--rhd-muted); font: 700 .7rem/1 var(--rh-sans); letter-spacing: .1em; text-transform: uppercase; }
+  & .dart-title-field input { min-height: 56px; padding: 8px 14px; color: var(--rh-ink); font: 400 clamp(1.35rem, 1.1rem + .9vw, 1.85rem)/1.25 var(--rh-serif); }
+  & .dart-slug { display: grid; gap: 6px; }
+  & .dart-slug > label { font: 600 .84rem/1.3 var(--rh-sans); color: var(--rhd-text); }
+  & .dart-slug-row { display: flex; align-items: stretch; min-width: 0; border: 1px solid #d3e0ee; border-radius: var(--rhd-control); background: #fff; overflow: hidden; }
+  & .dart-slug-row:focus-within { border-color: #6aa9e2; box-shadow: var(--rhd-focus); }
+  & .dart-slug-prefix { display: flex; align-items: center; max-width: 45%; padding: 0 4px 0 12px; overflow: hidden; background: #f6f9fd; color: var(--rhd-muted); font: 400 .84rem/1 ui-monospace, Consolas, monospace; white-space: nowrap; text-overflow: ellipsis; border-right: 1px solid var(--rhd-line-soft); }
+  & .dart-slug-row input { border: 0 !important; box-shadow: none !important; flex: 1; min-width: 0; min-height: 40px; border: 0; border-radius: 0; box-shadow: none; font: 400 .88rem/1 ui-monospace, Consolas, monospace; }
+  & .dart-slug-row input:focus-visible { box-shadow: none; }
+  & .dart-slug-row .dash-icon-button { width: 40px; height: auto; border: 0; border-left: 1px solid var(--rhd-line-soft); border-radius: 0; }
+  & .dart-slug-url { display: flex; align-items: center; gap: 6px; min-width: 0; color: var(--rhd-muted); font-size: .76rem; }
+  & .dart-slug-url :is(a, span) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  & .dart-warning-text { display: flex; align-items: flex-start; gap: 6px; color: #92400e; font-size: .78rem; line-height: 1.4; }
+  & .dart-warning-text svg { flex: none; margin-top: 2px; }
+  & .dart-counter.is-good { color: #15803d !important; }
+  & .dart-counter.is-short { color: #b45309 !important; }
+  & .dart-counter.is-over { color: #b42318 !important; }
+
+  & .dart-body-card { gap: 12px; }
+  & .dart-body-card .visual-editor, & .dart-body-card > div:last-child { min-width: 0; }
+
+  & .dart-section-nav { display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 0; }
+  & .dart-section-nav button { min-height: 32px; padding: 0 12px; border: 1px solid var(--rhd-line); border-radius: 999px; background: #fff; color: var(--rhd-text); font: 600 .78rem/1 var(--rh-sans); cursor: pointer; }
+  & .dart-section-nav button:hover { border-color: var(--rh-blue); color: var(--rh-blue); }
+  & .dart-section-nav button:focus-visible { outline: none; box-shadow: var(--rhd-focus); }
+
+  & .dart-section { margin: 0; padding: 0; overflow: visible; scroll-margin-top: calc(var(--rhd-topbar) + var(--dart-head) + 16px); }
+  & .dart-section > summary { display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 12px 18px; list-style: none; cursor: pointer; font: 600 .95rem/1.2 var(--rh-sans); }
+  & .dart-section > summary::-webkit-details-marker { display: none; }
+  & .dart-section > summary::after { display: none; }
+  & .dart-section > summary:focus-visible { outline: none; box-shadow: inset var(--rhd-focus); }
+  & .dart-section-icon { width: 30px; height: 30px; flex: none; display: grid; place-items: center; border-radius: 9px; background: var(--rhd-selected); color: var(--rh-blue); }
+  & .dart-section-title { min-width: 0; }
+  & .dart-section-hint { margin-left: auto; padding: 4px 10px; border-radius: 999px; background: var(--rhd-line-soft); color: var(--rhd-muted); font: 600 .72rem/1.2 var(--rh-sans); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 50%; }
+  & .dart-section-hint.is-good { background: #e9f7ef; color: #15803d; }
+  & .dart-section-hint.is-warn { background: #fff4e0; color: #92400e; }
+  & .dart-section-chevron { flex: none; color: var(--rhd-muted); transition: transform .2s ease; }
+  & .dart-section:not(:has(.dart-section-hint)) .dart-section-chevron { margin-left: auto; }
+  & .dart-section[open] .dart-section-chevron { transform: rotate(180deg); }
+  & .dart-section-body { display: grid; gap: 14px; padding: 4px 18px 18px; border-top: 1px solid var(--rhd-line-soft); padding-top: 16px; }
+  & .dart-section-body label { display: grid; gap: 6px; margin: 0; color: var(--rhd-text); font: 600 .84rem/1.3 var(--rh-sans); }
+  & .dart-field-label { color: var(--rh-ink); font: 700 .74rem/1.2 var(--rh-sans); letter-spacing: .08em; text-transform: uppercase; }
+
+  /* SEO snippet */
+  & .dart-seo { display: grid; gap: 14px; }
+  & .dart-serp { margin: 0; padding: 14px 16px; border: 1px solid var(--rhd-line-soft); border-radius: 12px; background: #fff; font-family: Arial, sans-serif; }
+  & .dart-serp figcaption { margin-bottom: 10px; color: var(--rhd-muted); font: 700 .68rem/1 var(--rh-sans); letter-spacing: .1em; text-transform: uppercase; }
+  & .dart-serp-site { display: flex; align-items: center; gap: 10px; }
+  & .dart-serp-favicon { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: var(--rhd-badge); color: #fff; font: 700 .8rem/1 var(--rh-sans); }
+  & .dart-serp-site strong { display: block; color: #202124; font: 400 .86rem/1.2 Arial, sans-serif; }
+  & .dart-serp-site small { display: block; color: #4d5156; font: 400 .76rem/1.3 Arial, sans-serif; overflow-wrap: anywhere; }
+  & .dart-serp-title { margin: 8px 0 4px; color: #1a0dab; font: 400 1.18rem/1.3 Arial, sans-serif; overflow-wrap: anywhere; }
+  & .dart-serp-text { margin: 0; color: #4d5156; font: 400 .86rem/1.55 Arial, sans-serif; overflow-wrap: anywhere; }
+
+  /* media */
+  & .dart-media { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 18px; }
+  & .dart-image-field, & .dart-pdf { display: grid; gap: 10px; align-content: start; }
+  & .dart-image-preview { position: relative; margin: 0; overflow: hidden; border: 1px solid var(--rhd-line); border-radius: 12px; background: #f3f7fc; }
+  & .dart-image-preview img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  & .dart-image-preview figcaption { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px; border-top: 1px solid var(--rhd-line-soft); background: #fff; }
+  & .dart-image-preview .admin-button { min-height: 34px; padding: 0 12px; font-size: .8rem; }
+  & .dart-image-empty { display: grid; justify-items: center; gap: 6px; padding: 26px 16px; border: 1.5px dashed #b9d2ec; border-radius: 12px; background: #f8fbff; color: var(--rh-blue); text-align: center; cursor: pointer; transition: border-color .15s ease, background .15s ease; }
+  & .dart-image-empty:hover { border-color: var(--rh-blue); background: var(--rhd-selected); }
+  & .dart-image-empty:focus-visible { outline: none; box-shadow: var(--rhd-focus); }
+  & .dart-image-empty strong { color: var(--rh-ink); font: 600 .9rem/1.2 var(--rh-sans); }
+  & .dart-image-empty small { max-width: 300px; color: var(--rhd-muted); font-size: .78rem; line-height: 1.45; }
+  & .dart-pdf-current { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--rhd-line-soft); border-radius: 12px; background: #f8fbff; color: var(--rhd-muted); font-size: .84rem; }
+  & .dart-pdf-current.active { border-color: #bfdcf7; background: var(--rhd-selected); color: var(--rh-ink); }
+  & .dart-pdf-current span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  & .dart-pdf-current a { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; white-space: nowrap; }
+  & .dart-pdf-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  & .dart-pdf-upload { position: relative; display: inline-flex !important; grid-auto-flow: column; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border: 1.5px dashed #b9d2ec; border-radius: 12px; background: #fff; color: var(--rh-blue) !important; cursor: pointer; }
+  & .dart-pdf-upload:hover { border-color: var(--rh-blue); background: var(--rhd-hover); }
+  & .dart-pdf-upload input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  & .dart-pdf-upload:focus-within { box-shadow: var(--rhd-focus); }
+
+  /* taxonomy & credits */
+  & .dart-taxonomy { display: grid; gap: 18px; }
+  & .dart-taxonomy-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  & .dart-contributors { display: grid; gap: 10px; margin: 0; padding: 14px 0 0; border: 0; border-top: 1px solid var(--rhd-line-soft); }
+  & .dart-contributors legend { float: left; width: 100%; padding: 0; color: var(--rhd-text); font: 600 .84rem/1.3 var(--rh-sans); }
+  & .dart-contributors legend + * { clear: both; }
+  & .dart-credit-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; counter-reset: credit; }
+  & .dart-credit { display: grid !important; grid-template-columns: auto minmax(0, 1fr) minmax(120px, 150px) auto; align-items: center; gap: 10px; padding: 8px 10px; border: 1px solid var(--rhd-line-soft); border-radius: 12px; background: #fbfdff; }
+  & .dart-credit-avatar { width: 34px; height: 34px; display: grid; place-items: center; overflow: hidden; border-radius: 50%; background: var(--rhd-badge); color: #fff; font: 700 .74rem/1 var(--rh-sans); }
+  & .dart-credit-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  & .dart-credit-name { display: grid; min-width: 0; }
+  & .dart-credit-name strong { overflow: hidden; color: var(--rh-ink); font: 600 .86rem/1.25 var(--rh-sans); text-overflow: ellipsis; white-space: nowrap; }
+  & .dart-credit-name small { color: var(--rhd-muted); font-size: .74rem; }
+  & .dart-credit select { min-height: 34px; padding-block: 0; font-size: .82rem; }
+  & .dart-credit-actions { display: flex; gap: 2px; }
+  & .dart-credit-actions .dash-icon-button { width: 30px; height: 30px; border-color: transparent; background: transparent; }
+  & .dart-credit-actions .dash-icon-button:disabled { opacity: .35; cursor: not-allowed; }
+  & .dart-danger-icon:hover { color: #b42318 !important; border-color: #f3c2bd !important; }
+  & .dart-muted-box { margin: 0; padding: 12px 14px; border: 1px dashed var(--rhd-line); border-radius: 12px; color: var(--rhd-muted); font-size: .84rem; }
+  & .dart-inline-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  & .dart-inline-actions .admin-button { min-height: 36px; font-size: .82rem; }
+  & .dart-inline-form { display: grid; gap: 12px; padding: 14px; border: 1px solid #cfe3f7; border-radius: 12px; background: #f8fbff; }
+
+  & .dart-taxonomy .dash-chip-picker-field input { border: 0 !important; box-shadow: none !important; min-height: 38px; padding: 0; background: transparent; }
+
+  /* switches */
+  & .dart-switch { position: relative; display: flex !important; align-items: center; gap: 10px !important; cursor: pointer; font-weight: 500 !important; line-height: 1.35 !important; }
+  & .dart-switch input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  & .dart-switch-track { position: relative; width: 36px; height: 20px; flex: none; border-radius: 999px; background: #cbd6e3; transition: background .18s ease; }
+  & .dart-switch-track::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(6, 43, 128, .25); transition: transform .18s ease; }
+  & .dart-switch input:checked + .dart-switch-track { background: var(--rh-blue); }
+  & .dart-switch input:checked + .dart-switch-track::after { transform: translateX(16px); }
+  & .dart-switch input:focus-visible + .dart-switch-track { box-shadow: var(--rhd-focus); }
+  & .dart-switch svg { color: #d97706; flex: none; }
+  & .dart-author-fields { display: grid; gap: 12px; transition: opacity .18s ease; }
+  & .dart-author-fields.is-muted { opacity: .6; }
+
+  /* design */
+  & .dart-design { display: grid; gap: 14px; }
+  & .dart-design-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  & .dart-color-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  & .dart-color span { display: flex; align-items: center; gap: 8px; padding: 4px 10px 4px 4px; border: 1px solid #d3e0ee; border-radius: var(--rhd-control); background: #fff; }
+  & .dart-color input[type=color] { width: 40px; height: 32px; padding: 0; border: 0; border-radius: 8px; background: none; cursor: pointer; }
+  & .dart-color code { color: var(--rhd-muted); font-size: .8rem; }
+  & .dart-design-sample { padding: 16px 18px; border: 1px solid var(--rhd-line-soft); border-radius: 12px; }
+  & .dart-design-sample strong { display: block; margin-bottom: 4px; }
+  & .dart-source { display: grid; gap: 6px; color: var(--rhd-text); font-size: .86rem; }
+  & .dart-source a { display: inline-flex; align-items: center; gap: 6px; width: fit-content; }
+
+  /* publish panel */
+  & .dart-publish { gap: 12px; }
+  & .dart-publish select, & .dart-publish input[type=datetime-local] { min-height: 40px; }
+  & .dart-publish .editor-hint { margin: -4px 0 0; color: var(--rhd-muted); font-size: .76rem; line-height: 1.45; }
+  & .dart-visibility { display: grid; gap: 6px; margin: 0; padding: 10px 12px; border-radius: 12px; font-size: .8rem; line-height: 1.45; }
+  & .dart-visibility strong { display: flex; align-items: center; gap: 6px; font-size: .84rem; }
+  & .dart-visibility ul { margin: 0; padding-left: 18px; }
+  & .dart-visibility p { margin: 0; }
+  & .dart-visibility.ready { background: #e9f7ef; color: #14532d; }
+  & .dart-visibility.warning { background: #fff7e8; color: #7c3d06; }
+  & .dart-publish-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+  & .dart-publish-actions .admin-button { justify-content: center; min-height: 40px; }
+  & .dart-live-link { display: inline-flex; align-items: center; gap: 6px; width: fit-content; font: 600 .82rem/1.2 var(--rh-sans); }
+  & .dart-publish-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding-top: 12px; border-top: 1px solid var(--rhd-line-soft); }
+  & .dart-publish-foot .editor-save-state { display: grid; gap: 2px; color: var(--rhd-text); font: 500 .78rem/1.3 var(--rh-sans); }
+  & .dart-publish-foot .editor-save-state small { color: var(--rhd-muted); font-size: .72rem; }
+  & .dart-trash-link { display: inline-flex; align-items: center; gap: 6px; padding: 6px 8px; border: 0; border-radius: 8px; background: none; color: #b42318; font: 600 .8rem/1 var(--rh-sans); cursor: pointer; }
+  & .dart-trash-link:hover { background: #fdeeee; }
+  & .dart-trash-link:focus-visible { outline: none; box-shadow: var(--rhd-focus); }
+
+  /* readiness card */
+  & .dart-readiness { gap: 10px; }
+  & .dart-readiness-head { display: flex; align-items: center; gap: 14px; }
+  & .dart-readiness-head h2 { margin: 0; color: var(--rh-ink); font: 600 .92rem/1.2 var(--rh-sans); }
+  & .dart-readiness-head p { margin: 3px 0 0; color: var(--rhd-muted); font-size: .78rem; }
+  & .dart-score { position: relative; width: 64px; height: 64px; flex: none; display: grid; place-items: center; }
+  & .dart-score strong { position: relative; color: var(--rh-ink); font: 400 .98rem/1 var(--rh-serif); font-variant-numeric: lining-nums; letter-spacing: -.02em; }
+  & .dart-score-ring { position: absolute; inset: 0; transform: rotate(-90deg); }
+  & .dart-score-ring circle { fill: none; stroke: var(--rhd-line-soft); stroke-width: 6; }
+  & .dart-score-ring circle.is-value { stroke: var(--rh-blue); stroke-linecap: round; transition: stroke-dashoffset .4s ease; }
+  & .dart-checklist { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+  & .dart-checklist button { display: flex; align-items: center; gap: 9px; width: 100%; padding: 7px 8px; border: 0; border-radius: 9px; background: none; color: var(--rhd-text); font: 500 .82rem/1.3 var(--rh-sans); text-align: left; cursor: pointer; }
+  & .dart-checklist button svg { flex: none; color: #c3cfdd; }
+  & .dart-checklist button.is-done { color: var(--rhd-muted); }
+  & .dart-checklist button.is-done svg { color: #16a34a; }
+  & .dart-checklist button:hover { background: var(--rhd-hover); color: var(--rh-blue); }
+  & .dart-checklist button:focus-visible { outline: none; box-shadow: var(--rhd-focus); }
+
+  /* notices inside the editor */
+  & .dart-backup, & .dart-trash-notice { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 14px; margin: 0; padding: 14px 16px; border: 1px solid #f5d79e; border-radius: var(--rhd-radius); background: #fffaf0; color: #7c3d06; }
+  & .dart-backup > svg, & .dart-trash-notice > svg { flex: none; }
+  & .dart-backup > div, & .dart-trash-notice > p { flex: 1 1 280px; margin: 0; }
+  & .dart-backup strong { color: #5f2f04; font-size: .9rem; }
+  & .dart-backup p { margin: 2px 0 0; font-size: .82rem; }
+  & .dart-backup > span, & .dart-trash-notice > span { display: flex; flex-wrap: wrap; gap: 8px; }
+  & .dart-trash-notice { border-color: #f3c2bd; background: #fff5f4; color: #8a1f15; }
+
+  /* disabled (read-only) form */
+  & .dart-editor-fieldset:disabled .dart-image-empty, & .dart-editor-fieldset:disabled .dart-section-nav button { cursor: default; }
+
+  /* ================================================================ responsive */
+  @media (max-width: 1280px) {
+    & .dart-toolbar { grid-template-columns: minmax(200px, 1fr) repeat(2, minmax(130px, 1fr)); }
+    & .dart-toolbar .dart-search { grid-column: 1 / -1; }
+    & .dart-advanced { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    & .dart-editor-grid { grid-template-columns: minmax(0, 1fr) 300px; }
+    & .dart-media { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 1100px) {
+    & .dart-editor-grid { grid-template-columns: 1fr; }
+    & .dart-editor-grid { gap: 14px; }
+    /* Writing first, then the publish panel, then the secondary settings. */
+    & .dart-editor-main { display: contents; }
+    & .dart-editor-main > * { order: 3; min-width: 0; }
+    & .dart-editor-main > .dart-writing { order: 1; }
+    & .dart-editor-main > .dart-body-card { order: 1; }
+    & .dart-editor-side { order: 2; position: static; max-height: none; overflow: visible; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; margin: 0; padding: 0; }
+    & .dart-design-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 1024px) {
+    /* rows become cards */
+    & .dart-table-wrap { overflow: visible; }
+    & .dart-table, & .dart-table tbody { display: block; min-width: 0; width: 100%; }
+    & .dart-table thead { display: none; }
+    & .dart-table tr { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; grid-template-areas: "check title actions" ". status status" ". meta meta"; gap: 8px 10px; padding: 14px 12px; border-top: 1px solid var(--rhd-line-soft); }
+    & .dart-table tr.dart-skeleton-row { display: block; }
+    & .dart-table td { display: block; padding: 0; border: 0; }
+    & .dart-table .dart-cell-check { grid-area: check; width: auto; padding: 2px 0 0; }
+    & .dart-table .dart-cell-title { grid-area: title; min-width: 0; }
+    & .dart-row-title { min-width: 0; align-items: flex-start; }
+    & .dart-row-title > img, & .dart-row-title > .article-thumbnail-empty { width: 48px; height: 38px; }
+    & .dart-table .dart-cell-actions { grid-area: actions; }
+    & .dart-table .dart-cell-status { grid-area: status; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+    & .dart-cell-status small { margin: 0; }
+    & .dart-table .dart-cell-ready { grid-area: status; justify-self: end; }
+    & .dart-table .dart-cell-meta { grid-column: 2 / -1; max-width: none; min-width: 0; display: flex; gap: 6px; font-size: .8rem; }
+    & .dart-table .dart-cell-meta::before { content: attr(data-label); color: var(--rhd-muted); font-weight: 600; min-width: 92px; }
+    & .dart-table td.article-date small { display: inline; margin-left: 6px; }
+    & .dart-row-actions a.dash-icon-button { display: none; }
+    & .dart-ready-tip { left: auto; right: 0; }
+  }
+  @media (max-width: 760px) {
+    & .dart-topline { align-items: stretch; flex-direction: column; }
+    & .dart-type-switch { align-self: flex-start; }
+    & .dart-toolbar { grid-template-columns: 1fr 1fr; padding: 12px; }
+    & .dart-toolbar .dart-filter-button { justify-content: center; }
+    & .dart-advanced { grid-template-columns: 1fr 1fr; padding: 12px; }
+    & .dart-chip-row, & .dart-context { padding-inline: 12px; }
+
+    & .dart-footer { justify-content: center; padding: 12px; }
+    & .dart-bulk-bar { bottom: 10px; }
+    & .dart-bulk-bar strong { flex-basis: 100%; }
+    & .dart-bulk-bar select { flex: 1; }
+
+    & .dart-editor-head { top: var(--rhd-topbar); margin-top: 0; }
+    & .dart-editor-head-actions { width: 100%; }
+    & .dart-editor-head-actions .admin-button { flex: 1; justify-content: center; }
+    & .dart-hide-sm { display: none !important; }
+    & .dart-editor-side { grid-template-columns: 1fr; }
+    & .dart-card { padding: 14px; }
+    & .dart-section > summary { padding: 12px 14px; }
+    & .dart-section-body { padding: 14px; }
+    & .dart-section-hint { display: none; }
+    & .dart-section:not(:has(.dart-section-hint)) .dart-section-chevron, & .dart-section-chevron { margin-left: auto; }
+    & .dart-taxonomy-grid, & .dart-color-grid { grid-template-columns: 1fr; }
+    & .dart-credit { grid-template-columns: auto minmax(0, 1fr) auto; }
+    & .dart-credit select { grid-column: 2 / -1; grid-row: 2; }
+    & .dart-credit-actions { grid-column: 3; grid-row: 1; }
+    & .dart-slug-prefix { display: none; }
+  }
+  @media (max-width: 420px) {
+    & .dart-advanced { grid-template-columns: 1fr; }
+    & .dart-design-grid { grid-template-columns: 1fr; }
+    & .dart-editor-head-main { flex-wrap: wrap; gap: 8px; }
+  }
+}
+
+/* ================================================================ preview dialog (top layer) */
+.dart-preview { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; }
+.dart-preview::backdrop { background: rgba(6, 26, 70, .55); backdrop-filter: blur(3px); }
+.dart-preview-panel { display: grid; grid-template-rows: auto 1fr; height: 100%; padding: 16px; box-sizing: border-box; }
+.dart-preview-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; padding: 10px 12px 10px 18px; border-radius: 16px 16px 0 0; background: #fff; border-bottom: 1px solid #e8eff7; font-family: var(--rh-sans, "RB", Arial, sans-serif); }
+.dart-preview-bar strong { display: block; color: var(--rh-ink, #062b80); font: 400 1.15rem/1.2 var(--rh-serif, "RB", Arial, sans-serif); }
+.dart-preview-bar span { color: #5a6d86; font-size: .8rem; }
+.dart-preview-devices { display: inline-flex; gap: 4px; padding: 3px; border: 1px solid #dbe6f2; border-radius: 999px; }
+.dart-preview-devices button { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 12px; border: 0; border-radius: 999px; background: none; color: #2a405f; font: 600 .8rem/1 var(--rh-sans, "RB", Arial, sans-serif); cursor: pointer; }
+.dart-preview-devices button[aria-pressed=true] { background: var(--rh-navy, #062b80); color: #fff; }
+.dart-preview-devices button:focus-visible, .dart-preview .dash-icon-button:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(18, 106, 198, .25); }
+.dart-preview .dash-icon-button { width: 36px; height: 36px; display: inline-grid; place-items: center; padding: 0; border: 1px solid #dbe6f2; border-radius: 10px; background: #fff; color: #2a405f; cursor: pointer; }
+.dart-preview-scroll { overflow-y: auto; border-radius: 0 0 16px 16px; background: #e9eef5; }
+.dart-preview-frame { margin: 0 auto; background: #fff; min-height: 100%; transition: max-width .25s ease; }
+.dart-preview-frame.is-desktop { max-width: 100%; }
+.dart-preview-frame.is-mobile { max-width: 390px; margin-block: 16px; border-radius: 22px; overflow: hidden; box-shadow: 0 20px 50px rgba(6, 43, 128, .2); min-height: calc(100% - 32px); }
+.dart-preview .publication-page { padding-bottom: 48px; }
+.dart-preview .dart-preview-title { max-width: 900px; margin: 0 0 18px; color: var(--rh-ink, #062b80); font-size: clamp(1.9rem, 1.35rem + 2.2vw, 3rem); font-weight: 400; line-height: 1.1; font-family: var(--rh-serif, "RB", Arial, sans-serif) !important; letter-spacing: -.02em; overflow-wrap: break-word; }
+.dart-preview .publication-body :is(h2, h3, h4) { font-family: var(--rh-serif, "RB", Arial, sans-serif) !important; }
+.dart-preview-frame.is-mobile .dart-preview-title { font-size: 1.85rem; }
+.dart-preview-frame.is-mobile .publication-container { width: calc(100% - 32px); }
+.dart-preview-byline { margin: 0 0 12px; color: var(--rh-ink, #062b80); font-weight: 600; }
+.dart-preview .publication-dates { display: flex; flex-wrap: wrap; gap: 8px 18px; color: #536887; font-size: .86rem; }
+.dart-preview .publication-dates span { display: inline-flex; align-items: center; gap: 6px; }
+.dart-preview-column { max-width: 860px; margin-inline: auto; }
+.dart-preview .publication-tags span { display: inline-flex; padding: 4px 10px; border-radius: 999px; background: var(--rh-ice, #eaf4ff); color: var(--rh-blue, #126ac6); font-size: .8rem; }
+.dart-preview-credits { display: grid; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+.dart-preview-credits li { display: flex; justify-content: space-between; gap: 10px; padding: 10px 14px; border: 1px solid #dbe6f2; border-radius: 12px; }
+.dart-preview-credits span { color: #536887; font-size: .86rem; }
+@media (max-width: 760px) { .dart-preview-panel { padding: 0; } .dart-preview-bar, .dart-preview-scroll { border-radius: 0; } .dart-preview-devices { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .rh-dash .dart-skeleton-row span { animation: none; }
+  .rh-dash .dart-score-ring circle.is-value, .dart-preview-frame { transition: none; }
+}

@@ -1,0 +1,17 @@
+/* A Google Form in a window over a public page. */
+.rp-form-dialog { width: min(760px, calc(100vw - 32px)); max-width: none; height: min(860px, calc(100dvh - 32px)); max-height: none; margin: auto; padding: 0; border: 0; border-radius: var(--rh-radius); background: #fff; box-shadow: var(--rh-shadow-lg); overflow: hidden; }
+.rp-form-dialog::backdrop { background: rgba(6, 43, 128, .55); }
+.rp-form-dialog-panel { display: flex; flex-direction: column; height: 100%; }
+.rp-form-dialog-panel > header { flex: none; display: flex; align-items: center; gap: 14px; padding: 8px 8px 8px 20px; border-bottom: 1px solid var(--rh-line); }
+.resref-page .rp-form-dialog-panel h2 { flex: 1; min-width: 0; margin: 0; color: var(--rh-navy); font: 600 1.05rem/1.3 var(--rh-sans); overflow-wrap: anywhere; }
+.resref-page .rp-form-dialog-panel header a { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--rh-blue); font: 600 .84rem/1.2 var(--rh-sans); text-decoration: none; }
+.resref-page .rp-form-dialog-panel header a:hover { text-decoration: underline; }
+.rp-form-dialog-panel header button { flex: none; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 0; border-radius: var(--rr-radius-control); background: none; color: var(--rh-navy); cursor: pointer; }
+.rp-form-dialog-panel header button:hover { background: var(--rh-ice); }
+.rp-form-dialog-body { position: relative; flex: 1; min-height: 0; }
+.resref-page .rp-form-dialog-body p { position: absolute; inset: 24px 0 auto; margin: 0; color: var(--rh-copy); text-align: center; }
+.rp-form-dialog-body iframe { position: relative; display: block; width: 100%; height: 100%; border: 0; }
+@media (max-width: 560px) {
+  .rp-form-dialog { width: 100vw; height: 100dvh; border-radius: 0; }
+  .rp-form-dialog-panel header a span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}

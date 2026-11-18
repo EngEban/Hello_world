@@ -1,0 +1,100 @@
+/*
+ * Article / resource cards (components/public/ResourceCard.jsx).
+ * Open layout: no card box, border or background. The article image carries
+ * the shape (rounded, soft shadow) and the text sits next to or under it.
+ */
+.rp-card { position: relative; display: flex; flex-direction: column; gap: 18px; min-width: 0; height: 100%; }
+
+.rp-card-media { position: relative; display: block; aspect-ratio: 1200 / 630; overflow: hidden; border-radius: var(--rr-radius-card); background: #fff; box-shadow: 0 1px 2px rgba(6, 43, 128, .06), 0 10px 28px rgba(6, 43, 128, .09); line-height: 0; transition: box-shadow .35s ease, transform .35s var(--rh-ease); }
+.rp-card-media img { width: 100%; height: 100%; object-fit: contain; display: block; transition: transform .6s var(--rh-ease); }
+.rp-card:hover .rp-card-media { box-shadow: 0 2px 6px rgba(6, 43, 128, .07), 0 18px 40px rgba(6, 43, 128, .14); }
+.rp-card:hover .rp-card-media img { }
+.rp-card-media.is-placeholder { background: var(--rh-ice); }
+.rp-card-placeholder { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 10px; color: var(--rh-blue); font: 400 1.05rem/1 var(--rh-serif); letter-spacing: .02em; }
+.rp-card-placeholder svg { width: 52px; height: 52px; padding: 13px; border-radius: var(--rr-radius-card); background: #fff; box-shadow: var(--rh-shadow-sm); }
+
+.rp-card-body { display: flex; flex-direction: column; gap: 10px; flex: 1; min-width: 0; }
+.rp-card-topic { margin: 0; }
+.rp-card .rh-chip { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.resref-page .rp-card h3 { margin: 0; font: 400 1.25rem/1.3 var(--rh-serif); letter-spacing: -.01em; color: var(--rh-ink); overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.rp-card h3 a { color: inherit; text-decoration: none; }
+.rp-card h3 a:hover { color: var(--rh-blue); }
+.rp-card h3 [lang="ar"], .rp-card h3[lang="ar"], .rp-card .has-arabic-text { font-family: Tahoma, var(--rh-sans); }
+.resref-page .rp-card-excerpt { margin: 0; color: var(--rh-copy); font-size: .96rem; line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.rp-card-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; color: var(--rh-copy); font: 500 .82rem/1.4 var(--rh-sans); }
+.rp-card-meta span { display: inline-flex; align-items: center; gap: 6px; }
+.rp-card-meta svg { color: var(--rh-blue); opacity: .8; }
+.rp-card-read { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; margin-top: 2px; color: var(--rh-blue); font: 700 .9rem/1 var(--rh-sans); text-decoration: none; }
+.rp-card-read svg { transition: transform .25s var(--rh-ease); }
+.rp-card-read:hover { color: var(--rh-navy); text-decoration: none; }
+.rp-card:hover .rp-card-read svg { transform: translateX(4px); }
+
+/* Resource card extras (Learn / questionnaires) */
+.rp-card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--rh-copy); font: 500 .82rem/1 var(--rh-sans); }
+.rp-card-head > span { display: inline-flex; align-items: center; gap: 5px; flex: none; }
+.rp-card-head svg { color: var(--rh-blue); }
+.rp-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; color: var(--rh-copy); font: 500 .82rem/1.4 var(--rh-sans); }
+.rp-card-foot > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rp-card-foot a { display: inline-flex; align-items: center; gap: 6px; flex: none; color: var(--rh-blue); font-weight: 700; font-size: .9rem; text-decoration: none; }
+.rp-card-foot a:hover { color: var(--rh-navy); }
+.rp-card-foot a svg { transition: transform .25s var(--rh-ease); }
+.rp-card:hover .rp-card-foot a svg { transform: translateX(3px); }
+
+.rp-card a:focus-visible { outline: 3px solid var(--rh-sky); outline-offset: 3px; border-radius: var(--rr-radius-xs); }
+
+/* Wide highlighted article: large image beside the text, no container. */
+.rp-card-feature { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; gap: clamp(24px, 3.5vw, 48px); }
+.resref-page .rp-card-feature h3 { font-size: clamp(1.5rem, 1.2rem + .9vw, 2rem); line-height: 1.18; -webkit-line-clamp: 4; }
+.rp-card-feature .rp-card-body { gap: 14px; }
+.rp-card-feature .rp-card-excerpt { -webkit-line-clamp: 4; font-size: 1.02rem; }
+
+/* One-by-one list (database, Learn): image left, text right, spacing instead of boxes. */
+.rp-card-list { display: grid; gap: clamp(32px, 4vw, 48px); }
+.rp-card-list > .rp-card,
+.rp-card-list > .rp-card-skeleton { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); align-items: center; gap: clamp(20px, 3vw, 36px); height: auto; }
+.rp-card-list > .rp-card .rp-card-foot { margin-top: 4px; }
+
+/* Grid (questionnaires, related reading, author pages) keeps image-over-text cards. */
+.rp-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: clamp(28px, 3vw, 40px) 28px; }
+.rp-card-grid > * { min-width: 0; }
+
+/* Loading skeletons (same shapes, no boxes) */
+.rp-card-skeleton { display: flex; flex-direction: column; gap: 10px; }
+.rp-card-skeleton::before { content: ''; aspect-ratio: 1200 / 630; border-radius: var(--rr-radius-card); background: linear-gradient(90deg, var(--rh-mist) 0%, #fff 50%, var(--rh-mist) 100%); background-size: 200% 100%; animation: rh-loading-sheen 1.4s linear infinite; }
+.rp-card-list > .rp-card-skeleton { grid-template-rows: repeat(4, auto); }
+.rp-card-list > .rp-card-skeleton::before { grid-row: 1 / -1; }
+.rp-card-skeleton span { display: block; height: 12px; border-radius: var(--rr-radius-xs); background: linear-gradient(90deg, var(--rh-line) 0%, var(--rh-mist) 50%, var(--rh-line) 100%); background-size: 200% 100%; animation: rh-loading-sheen 1.4s linear infinite; }
+.rp-card-skeleton span:nth-child(1) { width: 28%; }
+.rp-card-skeleton span:nth-child(2) { width: 86%; height: 18px; }
+.rp-card-skeleton span:nth-child(3) { width: 64%; height: 18px; }
+.rp-card-skeleton span:nth-child(4) { width: 92%; }
+
+@media (max-width: 860px) {
+  .rp-card-list > .rp-card, .rp-card-list > .rp-card-skeleton { grid-template-columns: minmax(0, 240px) minmax(0, 1fr); }
+  .rp-card-list .rp-card-excerpt { -webkit-line-clamp: 2; }
+}
+@media (max-width: 620px) {
+  .rp-card-feature, .rp-card-list > .rp-card, .rp-card-list > .rp-card-skeleton { grid-template-columns: 1fr; gap: 16px; }
+  .rp-card-list > .rp-card-skeleton::before { grid-row: auto; }
+  .rp-card-list { gap: 36px; }
+}
+
+/* Pager (components/public/PublicPagination.jsx) */
+.rp-pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-top: 44px; padding: 10px 0; border-top: 1px solid var(--rh-line); color: var(--rh-copy); font: 600 .9rem/1 var(--rh-sans); }
+.resref-page .rp-pager .rp-pager-step { min-height: 44px; display: inline-flex; align-items: center; gap: 6px; padding: 0 18px; border: 1px solid var(--rh-line); border-radius: 999px; background: #fff; color: var(--rh-navy); font: 700 .88rem/1 var(--rh-sans); text-decoration: none; box-shadow: none; transition: border-color .2s ease, color .2s ease, background .2s ease, transform .25s var(--rh-ease); }
+.resref-page .rp-pager a.rp-pager-step:hover, .resref-page .rp-pager button.rp-pager-step:not(:disabled):hover { border-color: var(--rh-blue); color: var(--rh-blue); background: var(--rh-ice); transform: none; text-decoration: none; }
+.resref-page .rp-pager .rp-pager-step:disabled, .rp-pager .rp-pager-step.is-disabled { opacity: 1; color: #5a6d86; background: #f3f7fc; border-style: dashed; cursor: not-allowed; } /* readable (4.9:1) yet clearly inactive */
+.rp-pager-pages { display: flex; align-items: center; gap: 6px; }
+.rp-pager-number { min-width: 44px; height: 44px; display: inline-grid; place-items: center; padding: 0 6px; border: 0; border-radius: 999px; background: transparent; color: var(--rh-navy); font: 700 .9rem/1 var(--rh-sans); text-decoration: none; cursor: pointer; transition: background .2s ease, color .2s ease; }
+/* Out-rank the global overflow guard (.resref-page :is(a, button) { min-width: 0 }) so page numbers keep a 44px touch target (WCAG 2.5.8). */
+.resref-page .rp-pager .rp-pager-number { min-width: 44px; }
+.rp-pager-number:hover { background: var(--rh-ice); color: var(--rh-blue); text-decoration: none; }
+.rp-pager-number.is-current { background: var(--rh-navy); color: #fff; cursor: default; }
+.rp-pager-gap { color: var(--rh-copy); padding: 0 2px; }
+.rp-pager-status { padding: 0 6px; color: var(--rh-copy); font: 600 .8rem/1.2 var(--rh-sans); white-space: nowrap; }
+@media (max-width: 620px) {
+  .rp-pager { border-radius: var(--rr-radius-panel); justify-content: center; }
+  .rp-pager-pages { order: -1; width: 100%; justify-content: center; }
+  .rp-pager-status { order: 3; width: 100%; text-align: center; }
+  .rp-pager-step { flex: 1; justify-content: center; }
+}

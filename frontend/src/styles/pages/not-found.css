@@ -1,0 +1,39 @@
+/* 404 page */
+.rp-404-section { position: relative; z-index: 2; padding-top: 0; }
+.rp-404-panel { position: relative; overflow: hidden; isolation: isolate; margin-top: clamp(-56px, -4vw, -36px); padding: clamp(28px, 5vw, 60px); }
+.rp-404-copy { position: relative; display: grid; gap: 16px; justify-items: start; max-width: 640px; }
+.rp-404-mark { width: 60px; height: 60px; display: grid; place-items: center; border-radius: var(--rr-radius-card); background: var(--rh-gradient); color: #fff; box-shadow: 0 12px 26px rgba(18, 106, 198, .28); }
+.resref-page .rp-404-copy h2 { margin: 6px 0 0; color: var(--rh-ink); font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.6rem); line-height: 1.12; }
+.rp-404-copy p { margin: 0; color: var(--rh-copy); font-size: 1.05rem; line-height: 1.7; }
+.rp-404-search { position: relative; display: flex; align-items: center; gap: 8px; width: 100%; max-width: 560px; margin-top: 10px; padding: 6px; border: 1px solid var(--rh-line); border-radius: 999px; background: #fff; box-shadow: var(--rh-shadow-sm); }
+.rp-404-search:focus-within { border-color: var(--rh-blue); box-shadow: 0 0 0 4px rgba(79, 185, 252, .2); }
+.rp-404-search > svg { flex: none; margin-left: 12px; color: var(--rh-blue); }
+.resref-page .rp-404-search input { flex: 1; min-width: 0; height: 46px; padding: 0 8px; border: 0; background: transparent; color: var(--rh-ink); font: 400 1rem/1 var(--rh-sans); box-shadow: none; }
+.resref-page .rp-404-search input:focus-visible { box-shadow: none; }
+.resref-page .rp-404-search .button { flex: none; min-height: 46px; padding-inline: 24px; }
+.rp-404-number { position: absolute; right: clamp(-10px, 2vw, 40px); bottom: -.18em; z-index: -1; font: 400 clamp(8rem, 5rem + 12vw, 17rem)/1 var(--rh-serif); letter-spacing: -.05em; background: var(--rh-gradient-soft); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-stroke: 1px rgba(18, 106, 198, .14); user-select: none; }
+
+.rp-404-links { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-top: 28px; }
+.rp-404-link { display: grid; grid-template-rows: auto 1fr auto; gap: 12px; padding: 20px; border: 1px solid var(--rh-line); border-radius: var(--rh-radius); background: #fff; color: var(--rh-ink); text-decoration: none; transition: transform .3s var(--rh-ease), border-color .3s ease, box-shadow .3s ease; }
+.rp-404-link:hover { color: var(--rh-ink); border-color: rgba(18, 106, 198, .3); box-shadow: var(--rh-shadow-sm); }
+.rh-motion .rp-404-link[data-reveal].is-revealed { transition: opacity .8s var(--rh-ease), transform .3s var(--rh-ease), border-color .3s ease, box-shadow .3s ease; transition-delay: var(--rh-delay, 0ms), 0ms, 0ms, 0ms; }
+.rp-404-link:hover, .rh-motion .rp-404-link[data-reveal].is-revealed:hover { }
+.rp-404-link-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: var(--rr-radius-control); background: var(--rh-gradient-soft); color: var(--rh-blue); transition: background .3s ease, color .3s ease; }
+.rp-404-link:hover .rp-404-link-icon { background: var(--rh-gradient); color: #fff; }
+.rp-404-link-copy { display: grid; gap: 4px; }
+.rp-404-link-copy strong { font: 400 1.15rem/1.2 var(--rh-serif); }
+.rp-404-link-copy small { color: var(--rh-copy); font-size: .86rem; line-height: 1.5; }
+.rp-404-link-arrow { color: var(--rh-blue); transition: transform .25s var(--rh-ease); }
+.rp-404-link:hover .rp-404-link-arrow { transform: translateX(3px); }
+
+@media (max-width: 1024px) {
+  .rp-404-links { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 680px) {
+  .rp-404-links { grid-template-columns: 1fr; }
+  .rp-404-link { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: none; align-items: center; padding: 16px; }
+  .rp-404-search { flex-wrap: wrap; border-radius: var(--rr-radius-card); }
+  .rp-404-search input { flex-basis: calc(100% - 48px); }
+  .resref-page .rp-404-search .button { width: 100%; border-radius: var(--rr-radius-card); }
+}
+.resref-page .rp-404 .button { border-radius: 999px; }

@@ -1,0 +1,68 @@
+/*
+ * Public request forms (ContactForm, RequestForm): premium field styling on
+ * top of the shared .rh-form system. Scoped to .resref-page .rp-form so the
+ * older .contact-form rules in legacy stylesheets cannot leak in.
+ */
+.resref-page form.rp-form { position: relative; display: grid; gap: 18px; margin: 0; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; overflow: visible; }
+.resref-page form.rp-form::before { content: none; }
+.resref-page .rp-form .rh-form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; flex-direction: initial; }
+
+.resref-page .rp-form-head { display: grid; gap: 8px; padding-bottom: 18px; border-bottom: 1px solid var(--rh-line); }
+.resref-page .rp-form-head h3 { margin: 0; color: var(--rh-ink); font: 400 clamp(1.45rem, 1.25rem + .6vw, 1.8rem)/1.2 var(--rh-serif); letter-spacing: -.01em; }
+.resref-page .rp-form-head p { margin: 0; color: var(--rh-copy); font-size: .96rem; line-height: 1.6; }
+
+.resref-page .rp-field { display: grid; gap: 8px; min-width: 0; color: var(--rh-ink); font: 600 .84rem/1.3 var(--rh-sans); letter-spacing: .01em; }
+.resref-page .rp-form .rp-field > label { display: block; }
+.resref-page .rp-field > label, .resref-page .rp-select > span { color: var(--rh-ink); font: 600 .84rem/1.3 var(--rh-sans); }
+.resref-page .rp-required { color: var(--rh-blue); }
+.resref-page .rp-form :is(input:not([type="checkbox"], [type="radio"], [type="file"]), select, textarea) {
+  width: 100%; min-height: 52px; margin: 0; padding: 13px 16px;
+  border: 1px solid var(--rh-line); border-radius: var(--rr-radius-card); background-color: var(--rh-mist);
+  color: var(--rh-ink); font: 400 .98rem/1.45 var(--rh-sans); box-shadow: none;
+  transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+.resref-page .rp-form select { appearance: none; -webkit-appearance: none; padding-right: 44px; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23126ac6' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center; }
+.resref-page form.rp-form .rp-field textarea { min-height: 150px; resize: vertical; }
+.resref-page .rp-form :is(input, select, textarea)::placeholder { color: #7a8ca5; opacity: 1; }
+.resref-page .rp-form :is(input, select, textarea):hover { border-color: #c3d6ea; }
+.resref-page .rp-form :is(input, select, textarea):focus,
+.resref-page .rp-form :is(input, select, textarea):focus-visible { outline: none; border-color: var(--rh-blue); background-color: #fff; box-shadow: 0 0 0 4px rgba(79, 185, 252, .2); }
+.resref-page .rp-form :is(input, select, textarea)[aria-invalid="true"] { border-color: #d65b5b; background-color: #fff; box-shadow: 0 0 0 3px rgba(214, 91, 91, .12); }
+
+.resref-page .rp-file { padding: 16px; border: 1.5px dashed #c3d6ea; border-radius: var(--rr-radius-card); background: #fff; color: var(--rh-copy); font-weight: 600; }
+.resref-page .rp-form .rp-file input[type="file"] { width: 100%; padding: 0; border: 0; background: none; color: var(--rh-copy); font: 400 .9rem var(--rh-sans); }
+.resref-page .rp-form .rp-file input[type="file"]::file-selector-button { margin-right: 14px; padding: 9px 16px; border: 1px solid var(--rh-line); border-radius: 999px; background: var(--rh-mist); color: var(--rh-blue); font: 700 .84rem/1 var(--rh-sans); cursor: pointer; transition: border-color .2s ease, background-color .2s ease; }
+.resref-page .rp-form .rp-file input[type="file"]::file-selector-button:hover { border-color: var(--rh-blue); background: #fff; }
+.resref-page .rp-file:focus-within { border-color: var(--rh-blue); }
+
+.resref-page .rp-form-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 18px; padding-top: 4px; }
+.resref-page .rp-form .rp-form-footer .button { width: auto; min-height: 52px; padding-inline: 28px; border-radius: 999px; background: var(--rh-gradient); background-size: 160% 100%; font-size: .95rem; box-shadow: 0 12px 26px rgba(18, 106, 198, .26); }
+.resref-page .rp-form .rp-form-footer .button:hover { background: var(--rh-gradient); background-size: 160% 100%; background-position: 100% 0; }
+.resref-page .rp-form .rp-form-footer .button:focus-visible { outline: 3px solid var(--rh-sky); outline-offset: 3px; }
+.resref-page .rp-form .rp-form-footer .button[aria-busy="true"] { cursor: progress; }
+.resref-page .rp-form-note { color: var(--rh-copy); font: 500 .8rem/1.3 var(--rh-sans); }
+.resref-page .rp-form-note span { color: var(--rh-blue); }
+
+.resref-page .rp-form > :is(.error, .success) { display: flex; gap: 10px; align-items: flex-start; margin: 0; padding: 14px 16px; border: 1px solid transparent; border-radius: var(--rr-radius-card); font: 500 .92rem/1.5 var(--rh-sans); box-shadow: none; }
+.resref-page .rp-form > .error { border-color: rgba(201, 42, 42, .18); border-left: 4px solid #c43c3c; background: #fdf1f1; color: #a42828; }
+.resref-page .rp-form > .success { border-color: rgba(8, 127, 91, .22); background: linear-gradient(135deg, #e8f8f0, #f2fbf7); color: #0b6b4a; font-weight: 600; }
+.resref-page .rp-form > .success svg { flex: none; margin-top: 1px; color: #0f8a5f; }
+.resref-page .rp-form-success { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start; padding: 16px 18px; border: 1px solid rgba(8, 127, 91, .22); border-radius: var(--rr-radius-card); background: linear-gradient(135deg, #e8f8f0, #f2fbf7); color: #0b6b4a; box-shadow: none; animation: rh-fade-up .5s var(--rh-ease) both; }
+.resref-page .rp-form-success svg { color: #0f8a5f; }
+.resref-page .rp-form-success strong { display: block; margin-bottom: 3px; font: 700 .98rem/1.35 var(--rh-sans); }
+.resref-page .rp-form-success small { display: block; color: #19735a; font-size: .88rem; line-height: 1.5; }
+
+/* Raised panel that holds a form on the contact, consultation and join pages. */
+.rp-form-panel { position: relative; padding: clamp(24px, 3.2vw, 40px); border: 1px solid var(--rh-line); border-radius: var(--rh-radius-lg); background: #fff; box-shadow: var(--rh-shadow-lg); isolation: isolate; }
+.rp-form-panel-label { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; color: var(--rh-blue); font: 700 .74rem/1.2 var(--rh-sans); letter-spacing: .14em; text-transform: uppercase; }
+.rp-form-panel-label svg { flex: none; }
+
+@media (max-width: 680px) {
+  .resref-page .rp-form .rh-form-row { grid-template-columns: 1fr; }
+  .resref-page .rp-form-footer { flex-direction: column; align-items: stretch; }
+  .resref-page .rp-form .rp-form-footer .button { width: 100%; }
+  .resref-page .rp-form-note { text-align: center; }
+  .rp-form-panel { padding: 22px 18px; border-radius: var(--rr-radius-panel); }
+}

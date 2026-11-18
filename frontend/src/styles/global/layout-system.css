@@ -1,0 +1,182 @@
+/*
+ * ResRef layout system: the single source for the public page grid, type scale,
+ * corner radii and interaction rules. The values live in design-system.css;
+ * this file makes every older public stylesheet use them. It loads last in
+ * main.jsx, and page stylesheets load later still with routes, so selectors
+ * start at .resref-app-shell to stay ahead of them.
+ */
+
+/* ---------- Page grid ---------- */
+.resref-app-shell .resref-page {
+  --public-container: var(--rr-page-width);
+  --public-reading-width: var(--rr-page-width);
+}
+.resref-app-shell .rh-container,
+.resref-app-shell .resref-page .site-container,
+.resref-app-shell .rr-contact-strip-inner {
+  width: var(--rr-page-width);
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: 0;
+}
+.resref-app-shell .app-topbar.rr-navigation {
+  padding-inline: max(var(--rr-page-gutter), calc((100% - var(--rr-container)) / 2));
+}
+.resref-app-shell .ssz-page,
+.resref-app-shell .rp-tool-container,
+.resref-app-shell .rp-studio-wrap,
+.resref-app-shell .publication-container {
+  width: var(--rr-page-width);
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+/* ---------- Type scale ---------- */
+.resref-app-shell .resref-page :is(h1, h2, h3) { text-wrap: balance; }
+.resref-app-shell .rh-hero h1 { font-size: var(--rh-hero-title-size, var(--rr-type-hero)); line-height: 1.06; }
+.resref-app-shell .resref-page :is(.rh-page-hero, .rp-tool-heading, .ras-hero) h1 { font-size: var(--rr-type-h1); line-height: 1.08; }
+.resref-app-shell .resref-page .publication-header h1 { font-size: var(--rr-type-h1-article); line-height: 1.16; }
+.resref-app-shell .resref-page :is(.rh-intro, .rh-database-intro, .rh-telegram-copy, .rh-band-panel, .rh-cta-band, .rp-consult-request-panel, .rp-contact-direct-copy, .rp-about-mission-copy, .rp-legal-intro) h2,
+.resref-app-shell .rp-tools-workflow .rh-intro h2 { font-size: var(--rr-type-h2); line-height: 1.14; }
+.resref-app-shell .resref-page .rp-tools-card h2 { font-size: clamp(1.375rem, 1.25rem + .45vw, 1.625rem); line-height: 1.2; }
+.resref-app-shell .resref-page .publication-body h2 { font-size: clamp(1.375rem, 1.25rem + .55vw, 1.75rem); }
+.resref-app-shell .resref-page .publication-body h3 { font-size: var(--rr-type-h3); }
+.resref-app-shell .resref-page :is(.rh-card, .rp-join-card) h3 { font-size: var(--rr-type-h3); line-height: 1.25; }
+.resref-app-shell .resref-page :is(.rh-intro, .rh-page-hero, .rh-split-aside) p,
+.resref-app-shell .rr-home .rh-hero-lead { font-size: var(--rr-type-lead); line-height: 1.65; }
+.resref-app-shell .resref-page :is(.rh-card, .rp-tools-card) p { font-size: var(--rr-type-body); line-height: 1.65; }
+.resref-app-shell .rh-label { font-size: var(--rr-type-label); }
+
+/* ---------- Controls: one height, one corner, one text size ---------- */
+.resref-app-shell .resref-page :is(.button, .rh-button:not(.rh-button-text), .ssz-button, .rp-tool-primary, .rp-tool-mini-button, .ssz-chip, .rp-faq-category) { border-radius: var(--rr-radius-pill); }
+.resref-app-shell .resref-page :is(.button, .rh-button:not(.rh-button-text)) { min-height: 48px; font-size: .9375rem; }
+.resref-app-shell .resref-page :is(input:not([type=checkbox], [type=radio], [type=file], [type=range], [type=color]), select) { min-height: 48px; font-size: 1rem; border-radius: var(--rr-radius-control); }
+.resref-app-shell .resref-page textarea { font-size: 1rem; border-radius: var(--rr-radius-control); }
+.resref-app-shell .resref-page :is(.rh-search, .publication-search) button { border-radius: var(--rr-radius-pill); }
+
+/* Interaction: colour and shadow change on hover; size and position never do. */
+.resref-app-shell :is(a, button, summary):active { transform: none; }
+.resref-app-shell :is(a, button, summary, input, select, textarea):focus-visible { outline: 3px solid var(--rr-accent); outline-offset: 2px; }
+
+/* ---------- Footer ---------- */
+.resref-app-shell .rh-footer-main { grid-template-columns: minmax(0, 290px) minmax(0, 1fr) minmax(0, 270px); gap: 40px clamp(24px, 3vw, 48px); }
+.resref-app-shell .rh-footer-nav { grid-template-columns: repeat(4, auto); justify-content: space-between; gap: 28px 20px; }
+.resref-app-shell .rh-footer-column a { display: inline-block; white-space: nowrap; }
+.resref-app-shell .rh-footer .social-links { flex-wrap: nowrap; gap: 5px; }
+.resref-app-shell .rh-footer .social-links a { width: 34px; height: 34px; flex: none; }
+.resref-app-shell .rh-footer .social-links a:hover { transform: none; }
+@media (max-width: 1180px) {
+  .resref-app-shell .rh-footer-main { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .resref-app-shell .rh-footer-nav { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (max-width: 680px) {
+  .resref-app-shell .rh-footer-main { grid-template-columns: minmax(0, 1fr); }
+  .resref-app-shell .rh-footer-nav { grid-row: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: stretch; }
+  .resref-app-shell .rh-footer-column a { white-space: normal; }
+  .resref-app-shell .rh-footer .social-links { flex-wrap: wrap; }
+}
+
+/* ---------- Scrolling areas ---------- */
+.resref-app-shell .publication-sticky-toc,
+.resref-app-shell .universal-search-panel { scrollbar-width: thin; scrollbar-color: var(--rr-border-strong) transparent; }
+.resref-app-shell .app-mobile-panel { scrollbar-width: none; }
+.resref-app-shell .app-mobile-panel::-webkit-scrollbar { display: none; }
+
+/* ---------- Sample Size Calculator: study types on a real grid ---------- */
+.resref-app-shell .ssz .ssz-step-card .ssz-types { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr)); gap: 8px; }
+.resref-app-shell .ssz .ssz-step-card .ssz-type { width: 100%; justify-content: center; text-align: center; }
+@media (max-width: 680px) {
+  .resref-app-shell .ssz .ssz-step-card .ssz-types { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- Disabled states ---------- */
+/* A summary card with nothing to act on is still information, so it must not look faded. */
+.resref-app-shell .rp-rg-stat-button:disabled { opacity: 1; cursor: default; }
+
+/* ---------- Tool workspaces ---------- */
+.resref-app-shell .rp-tool-header { padding-bottom: clamp(24px, 3vw, 36px); }
+.resref-app-shell .rp-tool .rp-rg-search textarea { min-height: 96px; }
+.resref-app-shell .resref-page .rp-tool-search { flex: 1 1 200px; }
+.resref-app-shell .resref-page input { text-overflow: ellipsis; }
+.resref-app-shell .ssz .ssz-step-card .ssz-types { grid-auto-rows: 1fr; }
+.resref-app-shell .ssz-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.resref-app-shell .ssz-actions > * { width: 100%; justify-content: center; }
+.resref-app-shell .ssz-actions > :first-child { grid-column: 1 / -1; }
+.resref-app-shell .rp-tool .rp-rg-stat-button { justify-items: start; text-align: start; }
+
+/* ---------- Form sections: the shorter copy column follows the taller form ---------- */
+@media (min-width: 1025px) {
+  .resref-app-shell .rp-opps-apply-copy { position: sticky; top: 120px; }
+}
+
+/*
+ * ---------- One component standard ----------
+ * Interactive controls (buttons, inputs, selects, pagers, icon buttons): 44px high, 12px corners.
+ * Surfaces (cards, panels, heroes, boxes that wrap controls): 16px corners.
+ * Icon tiles: 12px corners. Only read-only badges and avatars stay fully round.
+ * The older stylesheets set these values hundreds of times and route CSS loads
+ * after this file, so !important is used here, for these shape rules only.
+ */
+.resref-app-shell :is(button, select, textarea, input:not([type=checkbox], [type=radio], [type=range], [type=color]), .button, .rh-button:not(.rh-button-text), a[class*="button"], .rp-pager-step, .rp-pager-number, .rr-primary-nav a, .rr-nav-search, .rh-circle-arrow, .rp-db-filter, .rp-db-clear, .rp-opps-clear, .rp-db-topic, .rh-footer .social-links a, .rr-contact-strip .social-links a, .ras-chip, .ssz-chip, .ssz-type, .rp-rg-filter-chip, .rp-search-all, .rp-legal-date a, .rh-contact-email) { border-radius: var(--rr-radius-control) !important; }
+.resref-app-shell :is([class*="-card-icon"], .rh-card-icon, .rh-footer-contact-icon, .rr-tools-icon, [class*="-icon-tile"], [class*="-feature-mark"], [class*="-rail-mark"]) { border-radius: var(--rr-radius-control) !important; }
+/* Buttons that are really cards or drop zones keep the surface corner. */
+.resref-app-shell :is(.rp-tool-stat, .rp-contact-route, .ras-drop, .ras-method, .ssz-design, .rp-faq-toggle, .rp-faq-item button, .rp-rg-reference) { border-radius: var(--rr-radius-card) !important; }
+/* Boxes that wrap a control. */
+.resref-app-shell :is(.rh-search, .rp-db-search, .rp-404-search, .publication-search, .rp-rg-search, .database-result-toolbar) { border-radius: var(--rr-radius-card) !important; }
+/* Segmented switches: outer box 12px, inner buttons 8px so the corners stay parallel. */
+.resref-app-shell :is(.ssz-segment, .ras-segment, .rp-ra-lang, .tab-group, .ras-steps, .rp-auth-tabs) { border-radius: var(--rr-radius-control) !important; }
+.resref-app-shell :is(.ssz-segment, .ras-segment, .rp-ra-lang, .tab-group, .ras-steps, .rp-auth-tabs) :is(button, a) { border-radius: 8px !important; }
+
+/* One control height and text size. */
+.resref-app-shell :is(.button, .rh-button:not(.rh-button-text), .ssz-button, .ras-button, .rp-tool-primary, .rp-tool-mini-button, .rp-pager-step, .app-account-button, .rp-opps-clear, .rp-db-clear) { min-height: var(--rr-control-height) !important; padding-block: 0 !important; padding-inline: 18px !important; font-size: .9375rem !important; line-height: 1.2 !important; }
+.resref-app-shell .resref-page :is(select, input:not([type=checkbox], [type=radio], [type=range], [type=color], [type=file])) { min-height: var(--rr-control-height) !important; font-size: .9375rem !important; }
+/* Square icon buttons: the same 44px box and the same border everywhere. */
+.resref-app-shell :is(.rr-nav-search, .rr-navigation .app-menu-button, .app-notification-button, .rp-tool-icon-button, .ssz-icon, .ras-icon-button, .rp-pager-number) { width: var(--rr-control-height) !important; min-width: var(--rr-control-height) !important; height: var(--rr-control-height) !important; flex: 0 0 var(--rr-control-height) !important; padding: 0 !important; display: inline-grid !important; place-items: center !important; }
+.resref-app-shell :is(.rr-nav-search, .rr-navigation .app-menu-button, .app-notification-button) { border: 1px solid var(--rr-border) !important; background: #fff !important; margin: 0 !important; }
+.resref-app-shell :is(.rr-nav-search, .rr-navigation .app-menu-button, .app-notification-button):hover { border-color: var(--rr-secondary) !important; background: var(--rr-primary-soft) !important; }
+/* Card icon tiles are one size. */
+.resref-app-shell :is(.rh-card-icon, .rp-tools-card-icon) { width: var(--rr-control-height); height: var(--rr-control-height); }
+
+/* Sort controls: a label beside a normal select, not a box inside a box. */
+.resref-app-shell .resref-page :is(.rp-db-sort, .rp-jf-sort) { padding: 0; border: 0; background: none; box-shadow: none; }
+.resref-app-shell .resref-page :is(.rp-db-sort, .rp-jf-sort) select { width: auto; padding-inline: 14px 34px; border: 1px solid var(--rr-border) !important; background-color: #fff; }
+/* Pager: disabled looks like the same button, only quieter. */
+.resref-app-shell .resref-page .rp-pager .rp-pager-step:disabled,
+.resref-app-shell .rp-pager .rp-pager-step.is-disabled { border-style: solid; background: #fff; color: var(--rr-disabled-text); }
+
+/* Tools menu in the main navigation. */
+.resref-app-shell .rr-tools-dropdown { align-items: center; }
+.resref-app-shell .rr-primary-nav .rr-tools-toggle { width: 22px; min-height: 40px; margin-inline-start: -8px; padding: 0; justify-content: center; }
+.resref-app-shell .rr-tools-dropdown.is-open > .rr-tools-toggle { background: none; }
+
+/* ---------- Scroll areas: text is never cut at an edge ---------- */
+/* Lists short enough to live on the page do not get their own scroll box. */
+.resref-app-shell .rp-db-topics nav { max-height: none; overflow: visible; }
+.resref-app-shell .rp-db-topics { position: static; max-height: none; overflow: visible; }
+/* Lists that must scroll: fixed heading, inner padding, snapped rows, soft edges, scrollbar in its own gutter. */
+.resref-app-shell .publication-sticky-toc { display: flex; flex-direction: column; overflow: hidden; padding: 18px 8px 12px 12px; }
+.resref-app-shell .publication-sticky-toc > :is(ol, ul, nav) { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding-block: 8px 12px; padding-inline-end: 4px; scrollbar-gutter: stable; scroll-padding-block: 8px; scroll-snap-type: y proximity; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 12px, #000 calc(100% - 16px), transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 12px, #000 calc(100% - 16px), transparent 100%); }
+.resref-app-shell .publication-sticky-toc li { scroll-snap-align: start; }
+.resref-app-shell :is(.publication-sticky-toc > *, .publication-mobile-toc ol, .rp-search-body, .rp-legal-aside, .ras-vars ul, .rp-rg-menu-dropdown, .rp-tool-modal, .rp-opps-modal-body, .opportunity-details-body) { scrollbar-width: thin; scrollbar-color: var(--rr-border-strong) transparent; scrollbar-gutter: stable; }
+.resref-app-shell :is(.publication-mobile-toc ol, .rp-search-body, .ras-vars ul) { padding-block: 10px 14px; scroll-padding-block: 10px; }
+.resref-app-shell .rp-db-aside { position: static; }
+
+/* Exact control height: padding and older fixed heights must not change it. */
+.resref-app-shell .resref-page :is(select, input:not([type=checkbox], [type=radio], [type=range], [type=color], [type=file])) { height: var(--rr-control-height) !important; padding-block: 0 !important; }
+.resref-app-shell :is(.rh-search, .rp-db-search, .rp-404-search, .publication-search) button,
+.resref-app-shell .resref-page :is(.button, .rh-button:not(.rh-button-text)) { height: auto !important; min-height: var(--rr-control-height) !important; padding-block: 0 !important; }
+/* These two must outrank the general control rule above. */
+.resref-app-shell.resref-app-shell.resref-app-shell.resref-app-shell :is(.rp-tool-stat, .rp-contact-route, .ras-drop, .ras-method, .ssz-design, .rp-faq-toggle, .rp-faq-item button, .rp-rg-reference, .rp-faq-list button, .rp-faq-accordion button) { border-radius: var(--rr-radius-card) !important; }
+.resref-app-shell.resref-app-shell.resref-app-shell.resref-app-shell :is(.ssz-segment, .ras-segment, .rp-ra-lang, .tab-group, .ras-steps, .rp-auth-tabs) :is(button, a) { border-radius: 8px !important; }
+
+/* The bottom bar only exists where the main navigation is hidden. */
+@media (min-width: 901px) {
+  .resref-app-shell .app-mobile-bottom-nav { display: none !important; }
+}
+/* Home search helper lines up with the search box. */
+.resref-app-shell .rr-home :is(.rh-database-support, .rh-search + p, .rh-search-note) { padding-inline: 0; margin-inline: 0; text-align: start; }
+.resref-app-shell .rp-jf-filters .rp-jf-filter-note { margin: 0 0 18px; }
+@media (max-width: 900px) {
+  .resref-app-shell.resref-app-shell.resref-app-shell.resref-app-shell .rr-nav-search { margin-inline-start: auto !important; }
+}

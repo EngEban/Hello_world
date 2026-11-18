@@ -1,0 +1,85 @@
+/* Team page (/team). Visual weight follows the organisation: founder, leadership, directors, teams. */
+
+.resref-page .rp-team-name { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 0; color: var(--rh-navy); }
+.resref-page .rp-team-role { margin: 0; color: var(--rh-blue); font: 600 .94rem/1.4 var(--rh-sans); }
+.resref-page .rp-team-bio { margin: 0; color: var(--rh-copy); font-size: .95rem; line-height: 1.6; }
+.rp-team-draft { padding: 3px 8px; border-radius: 999px; background: var(--rr-warning-bg); color: var(--rr-warning); font: 700 .68rem/1.2 var(--rh-sans); letter-spacing: .04em; text-transform: uppercase; }
+
+.rp-team-portrait { display: grid; place-items: center; overflow: hidden; background: var(--rh-ice); color: var(--rh-navy); font-family: var(--rh-sans); font-weight: 700; }
+.rp-team-portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.rp-team-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0; padding: 0; list-style: none; }
+.resref-page .rp-team-links a { display: inline-flex; align-items: center; gap: 3px; min-height: 28px; color: var(--rh-navy); font: 600 .88rem/1.2 var(--rh-sans); text-decoration: underline; text-decoration-color: var(--rh-line); text-underline-offset: 4px; }
+.resref-page .rp-team-links a:hover { color: var(--rh-blue); text-decoration-color: currentColor; }
+
+.rp-team-head { display: grid; gap: 8px; align-content: start; }
+.resref-page .rp-team-head h2 { margin: 0; color: var(--rh-navy); }
+.resref-page .rp-team-head p { margin: 0; max-width: 640px; color: var(--rh-copy); line-height: 1.6; }
+
+/* Founder: the largest element on the page */
+.rp-team-founder-layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(36px, 6vw, 88px); align-items: center; }
+.rp-team-founder-layout + .rp-team-founder-layout { margin-top: clamp(48px, 6vw, 84px); }
+.rp-team-founder-visual { position: relative; padding: 0 0 22px 22px; }
+.rp-team-founder-visual::before { content: ''; position: absolute; inset: 22px 22px 0 0; border: 1px solid rgba(18, 106, 198, .14); border-radius: var(--rh-radius-lg); background: var(--rh-gradient-soft); }
+.rp-team-portrait.is-founder { position: relative; aspect-ratio: 4 / 5; border-radius: var(--rh-radius-lg); box-shadow: var(--rh-shadow); font-size: clamp(3rem, 7vw, 5.5rem); }
+.rp-team-founder-copy { display: grid; gap: 14px; justify-items: start; min-width: 0; }
+.resref-page .rp-team-founder-copy .rp-team-name { font-size: var(--rr-type-h1); line-height: 1.08; }
+.resref-page .rp-team-founder-copy .rp-team-role { font-size: 1.08rem; }
+.resref-page .rp-team-founder-bio { margin: 6px 0 0; max-width: 640px; color: var(--rh-copy); font-size: 1.04rem; line-height: 1.75; white-space: pre-line; }
+.resref-page .rp-team-vision { margin: 8px 0; padding: 2px 0 2px 22px; max-width: 640px; border-left: 3px solid var(--rh-blue); color: var(--rh-navy); font: 500 clamp(1.1rem, 1rem + .4vw, 1.3rem)/1.55 var(--rh-sans); white-space: pre-line; }
+
+/* Leadership: medium portraits */
+.rp-team-leadership { background: var(--rh-mist); }
+.rp-team-leader-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: clamp(28px, 3vw, 40px); margin: clamp(24px, 3vw, 36px) 0 0; padding: 0; list-style: none; }
+.rp-team-leader-grid > li { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.rp-team-portrait.is-leader { width: 100%; max-width: 240px; aspect-ratio: 1; margin-bottom: 8px; border-radius: var(--rh-radius); background: #fff; font-size: 2.6rem; }
+.resref-page .rp-team-leader-grid .rp-team-name { font-size: 1.22rem; line-height: 1.25; }
+
+/* Directors: compact rows */
+.rp-team-director-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(32px, 5vw, 64px); margin: clamp(16px, 2vw, 24px) 0 0; padding: 0; list-style: none; }
+.rp-team-director-grid > li { display: flex; gap: 18px; padding-block: 20px; border-bottom: 1px solid var(--rh-line); min-width: 0; }
+.rp-team-director-grid > li > div { display: grid; gap: 5px; align-content: start; min-width: 0; }
+.rp-team-portrait.is-director { flex: none; width: 76px; height: 76px; border-radius: 50%; font-size: 1.3rem; }
+.resref-page .rp-team-director-grid .rp-team-name { font-size: 1.08rem; line-height: 1.3; }
+
+/* Teams: the name on the left, its people as small entries */
+.rp-team-unit { padding-block: clamp(28px, 3vw, 40px); }
+.rp-team-unit:last-child { padding-bottom: clamp(48px, 6vw, 84px); }
+.rp-team-unit + .rp-team-unit { padding-top: 0; }
+.rp-team-unit + .rp-team-unit .rp-team-unit-layout { padding-top: clamp(28px, 3vw, 40px); border-top: 1px solid var(--rh-line); }
+.rp-team-directors + .rp-team-unit, .rp-team-leadership + .rp-team-unit { padding-top: clamp(48px, 6vw, 72px); }
+.rp-team-unit-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: 20px clamp(28px, 4vw, 56px); }
+.resref-page .rp-team-unit .rp-team-head h2 { font-size: 1.3rem; line-height: 1.25; }
+.resref-page .rp-team-unit .rp-team-head p { font-size: .92rem; }
+.rp-team-member-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px 28px; margin: 0; padding: 0; list-style: none; }
+.rp-team-member-grid > li { display: flex; gap: 12px; align-items: flex-start; min-width: 0; }
+.rp-team-member-grid > li > div { display: grid; gap: 2px; min-width: 0; }
+.rp-team-portrait.is-member { flex: none; width: 48px; height: 48px; border-radius: 50%; font-size: .88rem; }
+.resref-page .rp-team-member-grid .rp-team-name { font-size: .98rem; line-height: 1.3; }
+.resref-page .rp-team-member-grid .rp-team-role { color: var(--rh-copy); font-size: .86rem; font-weight: 400; }
+.rp-team-more summary { width: fit-content; min-height: 28px; padding-top: 5px; color: var(--rh-blue); font: 600 .82rem/1.3 var(--rh-sans); cursor: pointer; }
+.rp-team-more[open] { display: grid; gap: 6px; }
+.resref-page .rp-team-more .rp-team-bio { font-size: .88rem; }
+
+/* Preview bar and messages */
+.rp-team-preview { background: var(--rr-warning-bg); color: var(--rr-text); }
+.rp-team-preview-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px; padding-block: 10px; font: 400 .9rem/1.4 var(--rh-sans); }
+.rp-team-preview-inner > span { flex: 1 1 280px; }
+.rp-team-preview-inner svg { vertical-align: -3px; margin-right: 6px; }
+.rp-team-preview-inner label { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; font-weight: 600; cursor: pointer; }
+.rp-team-preview-inner input { width: 17px; height: 17px; margin: 0; accent-color: var(--rh-blue); }
+.resref-page .rp-team-preview-inner a { display: inline-flex; align-items: center; min-height: 32px; color: var(--rh-navy); font-weight: 600; }
+.rp-team-message { display: grid; gap: 8px; padding-block: clamp(48px, 6vw, 84px); text-align: center; }
+.resref-page .rp-team-message :is(h1, h2, p) { margin: 0; }
+
+@media (max-width: 900px) {
+  .rp-team-founder-layout { grid-template-columns: minmax(0, 1fr); }
+  .rp-team-founder-visual { width: min(100%, 380px); }
+  .rp-team-director-grid { grid-template-columns: minmax(0, 1fr); }
+  .rp-team-unit-layout { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .rp-team-leader-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; }
+  .rp-team-portrait.is-director { width: 60px; height: 60px; font-size: 1.05rem; }
+  .rp-team-member-grid { grid-template-columns: minmax(0, 1fr); }
+}

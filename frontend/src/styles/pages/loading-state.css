@@ -1,0 +1,7 @@
+/* LoadingState: a quiet inline spinner + label (public site and dashboard). */
+.rr-loading-state { display: inline-flex; align-items: center; gap: 10px; margin: 0; padding: 10px 0; color: var(--rh-copy, var(--muted, #536887)); font: 500 .92rem/1.3 var(--rh-sans, "RB", Arial, sans-serif); }
+.rr-loading-spinner { flex: none; width: 18px; height: 18px; border: 2px solid var(--rh-line, #dbe6f2); border-top-color: var(--rh-blue, var(--rr-secondary, #126ac6)); border-radius: 50%; animation: rr-loading-spin .8s linear infinite; }
+@keyframes rr-loading-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .rr-loading-spinner { animation-duration: 2.4s; }
+}

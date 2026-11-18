@@ -1,0 +1,15 @@
+/* Reminder bar for members who have not confirmed their email yet. */
+.rr-verify-banner { border-bottom: 1px solid #f3d9a4; background: #fff8e6; color: #5c4200; font-family: var(--rh-sans, "RB", Arial, sans-serif); }
+.rr-verify-banner-inner { display: flex; align-items: center; gap: 12px; min-height: 48px; padding-block: 8px; }
+.rr-verify-banner-inner > svg { flex: none; color: #b7791f; }
+.rr-verify-banner p { flex: 1; margin: 0; color: #5c4200; font-size: .9rem; line-height: 1.45; }
+.rr-verify-banner p strong { color: #3d2c00; }
+.rr-verify-banner button { flex: none; min-height: 34px; padding: 0 14px; border: 1px solid #e3b65c; border-radius: 999px; background: #fff; color: #5c4200; font: 700 .82rem/1 var(--rh-sans, "RB", Arial, sans-serif); cursor: pointer; }
+.rr-verify-banner button:hover:not(:disabled) { background: #fdf0d2; }
+.rr-verify-banner button:disabled { opacity: .7; cursor: wait; }
+.rr-verify-banner .rr-verify-banner-close { width: 34px; padding: 0; display: grid; place-items: center; border-color: transparent; background: transparent; }
+.rr-verify-banner button:focus-visible { outline: 3px solid var(--rh-sky, #4fb9fc); outline-offset: 2px; }
+@media (max-width: 620px) {
+  .rr-verify-banner-inner { flex-wrap: wrap; }
+  .rr-verify-banner p { flex-basis: calc(100% - 60px); }
+}

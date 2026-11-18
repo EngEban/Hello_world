@@ -1,0 +1,141 @@
+.rr-skip-link { position:fixed; top:-100px; left:16px; z-index:1000; padding:12px 18px; background:#fff; color:#062b80; border:2px solid #126ac6; }
+.rr-skip-link:focus { top:10px; }
+/* The contact strip scrolls away; the existing main header stays sticky. */
+.rr-contact-strip { background:linear-gradient(90deg,var(--rr-primary,#062b80) 0%,var(--rr-primary,#062b80) 55%,var(--rr-secondary,#126ac6) 140%); color:#fff; }
+.rr-contact-strip-inner { display:flex; align-items:center; gap:28px; max-width:1440px; min-height:42px; margin-inline:auto; padding:4px 24px; }
+.rr-contact-strip a { display:inline-flex; align-items:center; gap:8px; min-height:32px; color:#fff; font:500 .875rem/1.4 "RB", Arial, sans-serif; text-decoration:none; white-space:nowrap; }
+.rr-contact-strip a:hover { color:#fff; text-decoration:underline; text-underline-offset:4px; }
+.rr-contact-strip a:focus-visible { outline:2px solid #fff; outline-offset:2px; }
+.rr-strip-contact { display:flex; align-items:center; flex-wrap:wrap; gap:24px; }
+.rr-contact-strip .social-links { display:flex; flex-wrap:nowrap; gap:2px; margin-left:auto; }
+.rr-contact-strip .social-links a { display:grid; place-items:center; width:32px; height:32px; min-height:32px; padding:0; border:0; border-radius:var(--rr-radius-xs); background:transparent; color:#fff; }
+.rr-contact-strip .social-links a:hover { background:rgba(255,255,255,.15); text-decoration:none; }
+.rr-contact-strip .social-links svg { width:18px; height:18px; }
+.rr-contact-strip .social-glyph { font-size:18px; }
+.rr-contact-strip .social-glyph-linkedin { font-size:15px; }
+/* One scroll container for the entire drawer, including its lower links. */
+.app-mobile-panel { height:100dvh; min-height:0; max-height:100dvh; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:thin; }
+.app-mobile-panel > * { flex-shrink:0; }
+.app-mobile-panel .app-sidebar-nav { flex:0 0 auto; overflow:visible; }
+.app-mobile-panel .app-sidebar-support { margin-bottom:max(22px,env(safe-area-inset-bottom)); }
+.app-topbar.rr-navigation { display:flex; flex-wrap:nowrap; min-height:76px; padding:12px max(24px,calc((100vw - 1240px)/2)); gap:18px; background:rgba(255,255,255,.9); -webkit-backdrop-filter:saturate(1.4) blur(14px); backdrop-filter:saturate(1.4) blur(14px); border-bottom:1px solid rgba(219,230,242,.85); box-shadow:0 8px 28px rgba(6,43,128,.05); }
+.rr-navigation .app-mobile-brand { padding:0; border:0; border-radius:0; box-shadow:none; background:none; gap:8px; flex:0 0 auto; }
+.rr-navigation .app-mobile-logo-mark { width:32px; height:44px; object-fit:contain; }
+.rr-navigation .app-mobile-logo-wordmark { width:93px; height:auto; max-height:30px; object-fit:contain; }
+.rr-navigation .app-menu-button { display:grid; width:44px; height:44px; min-width:44px; place-items:center; margin-right:8px; padding:0; border:1px solid #dbe6f2; border-radius:var(--rr-radius-control); background:#fff; color:#062b80; cursor:pointer; transition:border-color .2s ease,background .2s ease; }
+.rr-navigation .app-menu-button:hover { border-color:#126ac6; background:#edf6fc; }
+.rr-primary-nav { display:flex; align-items:center; justify-content:center; gap:2px; margin-left:auto; }
+.rr-primary-nav a, .rr-primary-nav button { display:inline-flex; align-items:center; gap:5px; min-height:40px; padding:0 12px; border:0; border-radius:999px; background:none; color:#062b80; font:600 .875rem/1.3 "RB", Arial, sans-serif; text-decoration:none; white-space:nowrap; cursor:pointer; transition:background .2s ease,color .2s ease; }
+.rr-primary-nav a:hover, .rr-primary-nav button:hover { color:#126ac6; background:#f2f8fe; text-decoration:none; }
+.rr-primary-nav a.active { color:#062b80; background:#edf6fc; box-shadow:inset 0 0 0 1px rgba(18,106,198,.16); text-decoration:none; }
+.rr-navigation .app-contact-chip { display:none; }
+.rr-primary-nav .rr-utility-nav-link { color:#062b80; font-size:.875rem; }
+.rr-navigation .app-topbar-actions { gap:10px; }
+.rr-navigation .app-account-button { min-height:44px; padding:10px 18px; border-radius:999px; background:var(--rr-primary,#062b80); color:#fff; font:700 .8125rem/1.3 "RB", Arial, sans-serif; white-space:nowrap; box-shadow:0 8px 20px rgba(18,106,198,.24); transition:background-position .3s ease,transform .25s ease,box-shadow .25s ease; }
+.rr-navigation .app-account-button:hover { color:#fff; background:var(--rr-secondary,#126ac6); box-shadow:0 12px 26px rgba(18,106,198,.3); }
+.rr-navigation .app-account-button svg { color:inherit; }
+.rr-nav-search { display:grid; place-items:center; flex:0 0 44px; min-width:44px; height:44px; padding:0; border:0; border-radius:50%; background:transparent; color:#062b80; cursor:pointer; transition:background .2s ease,color .2s ease; }
+.rr-nav-search:hover { background:#edf6fc; color:#126ac6; }
+/* Takes no space, so cancel the extra flex gap around it and match the spacing of the action buttons. */
+.rr-navigation .universal-search { position:static; flex:0; width:0; min-width:0; margin:0 0 0 -26px; }
+.rr-navigation .universal-search-control { display:none; }
+.rr-navigation .universal-search-panel { position:absolute; left:50%; right:auto; top:calc(100% + 6px); transform:translateX(-50%); width:min(760px,calc(100vw - 32px)); max-height:calc(100dvh - 190px); }
+.rr-navigation .universal-search-mobile-field { display:flex; }
+.rr-drawer-extra { display:grid; padding:0 24px 20px; gap:8px; }
+.rr-drawer-extra a { display:flex; justify-content:space-between; align-items:center; min-height:44px; color:#fff; font-size:14px; }
+.rr-navigation :is(a,button):focus-visible { outline:3px solid #4fb9fc; outline-offset:3px; }
+@media(max-width:1320px) {
+ .rr-primary-nav .rr-utility-nav-link { display:none; }
+}
+@media(max-width:1100px) {
+ .app-topbar.rr-navigation { gap:12px; padding-inline:20px; }
+ .rr-navigation .universal-search { margin-left:-14px; }
+ .rr-primary-nav { gap:0; }
+ .rr-primary-nav a, .rr-primary-nav button { padding:0 9px; }
+}
+@media(max-width:900px) {
+ .resref-app-shell { overflow-x:clip; }
+ .rr-contact-strip-inner { flex-wrap:wrap; gap:0 16px; padding-inline:16px; }
+ .rr-strip-contact { order:3; justify-content:center; width:100%; gap:20px; }
+ .app-topbar.rr-navigation { display:flex; flex-wrap:nowrap; min-height:68px; padding:10px 16px; gap:10px; }
+ .rr-navigation .app-menu-button { display:grid; min-width:44px; width:44px; height:44px; order:initial; margin:0; border:0; background:none; }
+ .rr-primary-nav { display:none; }
+ .rr-navigation .rr-nav-search { margin-left:auto; }
+ .rr-navigation .app-topbar-actions { flex:none; }
+ .rr-navigation .app-account-button { display:inline-flex; }
+ .rr-navigation .app-account-button span { display:inline; max-width:90px; }
+ .rr-navigation .app-account-button > svg { display:none; }
+}
+@media(max-width:420px) {
+ .rr-contact-strip-inner { gap:0 6px; padding-inline:12px; }
+ .rr-contact-strip a { gap:5px; }
+ .rr-contact-strip .social-links { gap:0; }
+ .rr-contact-strip .social-links a { width:26px; }
+ .rr-strip-contact { gap:12px; }
+ .app-topbar.rr-navigation { gap:4px; padding-inline:12px; }
+ .rr-navigation .app-mobile-logo-mark { width:27px; height:37px; }
+ .rr-navigation .app-mobile-logo-wordmark { width:75px; }
+ .rr-navigation .app-account-button { font-size:.75rem; padding:9px; }
+ .rr-navigation .app-notification-button { width:32px; min-width:32px; }
+}
+/* Mobile header: a compact contact strip, and a bar whose menu and search icons line up with the 16px page gutter. */
+@media(max-width:900px) {
+ /* Two centred lines: the social icons, then the bot handle, phone and email. */
+ .rr-contact-strip-inner { justify-content:center; min-height:0; padding-block:8px; column-gap:16px; row-gap:4px; }
+ .rr-contact-strip .social-links { order:1; justify-content:center; width:100%; margin-left:0; }
+ .rr-contact-strip .rr-bot-link { order:2; }
+ .rr-contact-strip .rr-strip-contact { order:3; width:auto; }
+ /* Bot, phone and email scale with the screen so the second line never wraps. */
+ .rr-contact-strip .rr-bot-link, .rr-contact-strip .rr-strip-contact a { gap:4px; font-size:clamp(.66rem, calc(4.8vw - 5px), .875rem); }
+ .rr-contact-strip .rr-bot-link svg, .rr-contact-strip .rr-strip-contact svg { width:15px; height:15px; }
+ .rr-contact-strip a { min-height:28px; }
+ .rr-contact-strip .social-links a { height:28px; min-height:28px; }
+ .app-topbar.rr-navigation { align-items:center; min-height:64px; padding:8px 16px; gap:8px; }
+ .rr-navigation .app-menu-button { margin-left:-10px; border:0; border-radius:var(--rr-radius-control); background:transparent !important; box-shadow:none; }
+ .rr-navigation .app-menu-button:hover, .rr-navigation .app-menu-button:focus-visible { background:#edf6fc !important; }
+ .rr-navigation .app-mobile-brand { align-items:center; }
+ .rr-navigation .rr-nav-search { margin-right:-10px; }
+ /* The empty search wrapper after the icon would otherwise add a gap. */
+ .rr-navigation .universal-search { margin-left:-8px; }
+}
+@media(max-width:420px) {
+ .rr-contact-strip-inner { column-gap:10px; padding-inline:8px; }
+ .rr-strip-contact { gap:10px; }
+ .app-topbar.rr-navigation { min-height:60px; padding-inline:16px; }
+}
+@media(max-width:350px) {
+ .rr-contact-strip .social-links a { width:24px; }
+ .rr-contact-strip .social-links svg { width:16px; height:16px; }
+ .rr-strip-contact { gap:8px; }
+ .rr-contact-strip-inner { column-gap:8px; }
+}
+/* Mobile drawer and bottom bar in the brand style (gradient only on the main call to action). */
+.resref-app-shell .app-mobile-panel { background:radial-gradient(90% 50% at 100% 0%,rgba(79,185,252,.22),transparent 60%),radial-gradient(80% 50% at 0% 100%,rgba(18,106,198,.4),transparent 65%),var(--rr-primary,#062b80); }
+.resref-app-shell .app-mobile-panel .app-sidebar-cta { border:0; border-radius:999px; background:var(--rr-secondary,#126ac6); box-shadow:0 12px 28px rgba(0,10,40,.3); }
+.resref-app-shell .app-mobile-panel .app-sidebar-cta:hover { filter:brightness(1.06); }
+.resref-app-shell .app-mobile-panel .app-sidebar-nav a { border-radius:var(--rr-radius-control); }
+.resref-app-shell .app-mobile-panel .app-sidebar-nav a.active { background:rgba(255,255,255,.12); box-shadow:inset 3px 0 0 var(--rr-accent,#4fb9fc); color:#fff; }
+.resref-app-shell .app-mobile-bottom-nav { background:rgba(255,255,255,.94); -webkit-backdrop-filter:saturate(1.4) blur(14px); backdrop-filter:saturate(1.4) blur(14px); border-top:1px solid rgba(219,230,242,.9); box-shadow:0 -8px 24px rgba(6,43,128,.06); }
+.resref-app-shell .app-mobile-bottom-nav a.active { color:var(--rr-secondary,#126ac6); }
+/* The footer itself reserves room for the fixed bottom bar, so the page and
+   the app wrapper need no extra bottom padding (it showed as a white strip). */
+@media(max-width:900px) {
+ .resref-app-shell .resref-app-main, .resref-app-shell .resref-page { padding-bottom:0; }
+ .rh-footer-bottom { padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
+}
+/* Tools dropdown in the main navigation. */
+.rr-tools-dropdown { position:relative; display:inline-flex; }
+.rr-tools-chevron { transition:transform .3s ease; }
+.rr-tools-dropdown.is-open .rr-tools-chevron { transform:rotate(180deg); }
+.rr-tools-dropdown.is-open > button { color:#126ac6; background:#f2f8fe; }
+.rr-tools-menu { position:absolute; top:calc(100% + 10px); left:50%; z-index:80; width:340px; padding:8px; border:1px solid #dbe6f2; border-radius:16px; background:#fff; box-shadow:0 18px 44px rgba(6,43,128,.14); transform:translateX(-50%); animation:rr-tools-in .22s ease-out both; }
+@keyframes rr-tools-in { from { opacity:0; transform:translate(-50%,-6px); } to { opacity:1; transform:translateX(-50%); } }
+@media (prefers-reduced-motion:reduce) { .rr-tools-menu { animation:none; } }
+.rr-tools-menu::before { content:''; position:absolute; inset:-12px 0 auto; height:12px; }
+.rr-tools-menu ul { display:grid; gap:2px; margin:0; padding:0; list-style:none; }
+.rr-primary-nav .rr-tools-menu a { display:flex; align-items:center; gap:12px; min-height:0; padding:10px 12px; border-radius:12px; white-space:normal; font-weight:400; }
+.rr-primary-nav .rr-tools-menu a:hover, .rr-primary-nav .rr-tools-menu a:focus-visible, .rr-primary-nav .rr-tools-menu a.active { background:#f2f8fe; box-shadow:none; color:#062b80; }
+.rr-tools-icon { width:38px; height:38px; flex:none; display:grid; place-items:center; border-radius:10px; background:#edf6fc; color:#126ac6; }
+.rr-tools-copy { display:grid; gap:2px; }
+.rr-tools-copy strong { color:#062b80; font:600 .9rem/1.25 "RB", Arial, sans-serif; }
+.rr-tools-copy small { color:#536887; font:400 .8rem/1.35 "RB", Arial, sans-serif; }

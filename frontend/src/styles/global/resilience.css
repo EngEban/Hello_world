@@ -1,0 +1,16 @@
+/* Styles for components added in the audit work (T-13/T-15/T-16). */
+
+/* Route error boundary and in-layout loading (T-15) */
+.route-error { display:grid; min-height:60vh; place-items:center; padding:48px 16px; }
+.route-error-card { max-width:520px; padding:32px; border:1px solid var(--rr-border); border-radius:var(--rr-radius-control); background:#fff; color:var(--rr-primary); text-align:center; box-shadow:var(--rr-shadow-md); }
+.route-error-card h1 { margin:8px 0 12px; font-size:1.6rem; }
+.route-error-card p { margin:0 0 20px; color:var(--rr-text-muted); line-height:1.6; }
+.route-error-eyebrow { color:var(--rr-secondary); font-weight:700; letter-spacing:.04em; text-transform:uppercase; font-size:.8rem; }
+.route-error-actions { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+.route-loading { padding:48px 0; min-height:100vh; }
+
+/* Public result pager (T-16) */
+.public-pagination { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px; margin:28px 0 8px; color:var(--rr-text-muted); font-weight:600; }
+.public-pagination .button:disabled { opacity:.6; cursor:not-allowed; }
+
+.request-form-file { display:grid; gap:6px; font-weight:600; }

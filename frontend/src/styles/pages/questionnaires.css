@@ -1,0 +1,23 @@
+/* Research questionnaires (pages/site/QuestionnairesPage.jsx). */
+.rp-quest { background: linear-gradient(180deg, #fff 0%, var(--rh-mist) 100%); color: var(--rh-ink); font-family: var(--rh-sans); }
+.rp-quest-heading { margin-bottom: 28px; }
+.rp-quest-search { display: grid; gap: 16px; justify-items: start; padding: clamp(22px, 2.6vw, 32px); border: 1px solid var(--rh-line); border-radius: var(--rh-radius-lg); background: #fff; box-shadow: var(--rh-shadow); }
+.rp-quest-search-icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: var(--rr-radius-card); background: var(--rh-gradient-soft); color: var(--rh-blue); }
+.resref-page .rp-quest-search p { margin: 0; color: var(--rh-copy); line-height: 1.7; }
+.rp-quest-covers { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-bottom: clamp(32px, 4vw, 48px); padding: 16px 20px; border: 1px solid var(--rh-line); border-radius: 999px; background: #fff; }
+.rp-quest-covers-label { display: inline-flex; align-items: center; gap: 8px; color: var(--rh-navy); font: 700 .74rem/1.2 var(--rh-sans); letter-spacing: .12em; text-transform: uppercase; }
+.rp-quest-covers-label svg { color: var(--rh-blue); }
+.rp-quest-covers ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.rp-quest-covers .rh-tag { background: var(--rh-ice); color: var(--rh-navy); }
+.rp-quest-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.rp-quest-loading { display: grid; gap: 22px; }
+.resref-page .rp-quest-state { display: grid; justify-items: center; gap: 10px; margin: 0 0 22px; padding: clamp(28px, 4vw, 44px) 24px; border: 1px dashed var(--rh-line); border-radius: var(--rh-radius-lg); background: #fff; color: var(--rh-copy); text-align: center; box-shadow: none; }
+.rp-quest-state-icon { width: 56px; height: 56px; display: grid; place-items: center; border-radius: var(--rr-radius-card); background: var(--rh-gradient-soft); color: var(--rh-blue); }
+.rp-quest-state.is-error .rp-quest-state-icon { background: #fdeeee; color: #a42828; }
+.resref-page .rp-quest-state strong { color: var(--rh-ink); font: 400 1.3rem/1.25 var(--rh-serif); }
+.resref-page .rp-quest-state p { max-width: 520px; margin: 0; line-height: 1.6; }
+.resref-page .rp-quest-state .error { color: #a42828; }
+@media (max-width: 680px) {
+  .rp-quest-covers { border-radius: var(--rr-radius-panel); }
+  .rp-quest-search .rh-button { width: 100%; }
+}

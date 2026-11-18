@@ -1,0 +1,362 @@
+[
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "home",
+    "route": "/",
+    "title": "Home",
+    "file": "screenshots/desktop-home.png",
+    "exists": true,
+    "bytes": 1144746
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "database",
+    "route": "/database",
+    "title": "Research Database",
+    "file": "screenshots/desktop-database.png",
+    "exists": true,
+    "bytes": 918237
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "advanced-search",
+    "route": "/advanced-search",
+    "title": "Advanced Search",
+    "file": "screenshots/desktop-advanced-search.png",
+    "exists": true,
+    "bytes": 902978
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "questionnaires",
+    "route": "/questionnaires",
+    "title": "Questionnaires",
+    "file": "screenshots/desktop-questionnaires.png",
+    "exists": true,
+    "bytes": 635438
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "journal-finder",
+    "route": "/journal-finder",
+    "title": "Journal Finder",
+    "file": "screenshots/desktop-journal-finder.png",
+    "exists": true,
+    "bytes": 842283
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "expert-consultation",
+    "route": "/expert-consultation",
+    "title": "Expert Consultation",
+    "file": "screenshots/desktop-expert-consultation.png",
+    "exists": true,
+    "bytes": 815252
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "sample-size-calculator",
+    "route": "/sample-size-calculator",
+    "title": "Sample Size Calculator",
+    "file": "screenshots/desktop-sample-size-calculator.png",
+    "exists": true,
+    "bytes": 962331
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "reference-generator",
+    "route": "/reference-generator",
+    "title": "Reference Generator",
+    "file": "screenshots/desktop-reference-generator.png",
+    "exists": true,
+    "bytes": 946055
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "research-opportunities",
+    "route": "/research-opportunities",
+    "title": "Research Opportunities",
+    "file": "screenshots/desktop-research-opportunities.png",
+    "exists": true,
+    "bytes": 551906
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "join-our-team",
+    "route": "/join-our-team",
+    "title": "Join Our Team",
+    "file": "screenshots/desktop-join-our-team.png",
+    "exists": true,
+    "bytes": 546224
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "about-us",
+    "route": "/about-us",
+    "title": "About Us",
+    "file": "screenshots/desktop-about-us.png",
+    "exists": true,
+    "bytes": 706409
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "contact-us",
+    "route": "/contact-us",
+    "title": "Contact Us",
+    "file": "screenshots/desktop-contact-us.png",
+    "exists": true,
+    "bytes": 511655
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "faq",
+    "route": "/faq",
+    "title": "FAQ",
+    "file": "screenshots/desktop-faq.png",
+    "exists": true,
+    "bytes": 474204
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "terms-of-use",
+    "route": "/terms-of-use",
+    "title": "Terms of Use",
+    "file": "screenshots/desktop-terms-of-use.png",
+    "exists": true,
+    "bytes": 730605
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "privacy-policy",
+    "route": "/privacy-policy",
+    "title": "Privacy Policy",
+    "file": "screenshots/desktop-privacy-policy.png",
+    "exists": true,
+    "bytes": 739726
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "cookie-policy",
+    "route": "/cookie-policy",
+    "title": "Cookie Policy",
+    "file": "screenshots/desktop-cookie-policy.png",
+    "exists": true,
+    "bytes": 732285
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "sign-in",
+    "route": "/sign-in",
+    "title": "Account Sign In",
+    "file": "screenshots/desktop-sign-in.png",
+    "exists": true,
+    "bytes": 404674
+  },
+  {
+    "viewport": "desktop",
+    "viewport_label": "Desktop 1440 x 1000",
+    "slug": "dashboard-login",
+    "route": "/dashboard/login",
+    "title": "Dashboard Login",
+    "file": "screenshots/desktop-dashboard-login.png",
+    "exists": true,
+    "bytes": 316124
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "home",
+    "route": "/",
+    "title": "Home",
+    "file": "screenshots/mobile-home.png",
+    "exists": true,
+    "bytes": 331828
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "database",
+    "route": "/database",
+    "title": "Research Database",
+    "file": "screenshots/mobile-database.png",
+    "exists": true,
+    "bytes": 233637
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "advanced-search",
+    "route": "/advanced-search",
+    "title": "Advanced Search",
+    "file": "screenshots/mobile-advanced-search.png",
+    "exists": true,
+    "bytes": 212335
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "questionnaires",
+    "route": "/questionnaires",
+    "title": "Questionnaires",
+    "file": "screenshots/mobile-questionnaires.png",
+    "exists": true,
+    "bytes": 227562
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "journal-finder",
+    "route": "/journal-finder",
+    "title": "Journal Finder",
+    "file": "screenshots/mobile-journal-finder.png",
+    "exists": true,
+    "bytes": 262696
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "expert-consultation",
+    "route": "/expert-consultation",
+    "title": "Expert Consultation",
+    "file": "screenshots/mobile-expert-consultation.png",
+    "exists": true,
+    "bytes": 134729
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "sample-size-calculator",
+    "route": "/sample-size-calculator",
+    "title": "Sample Size Calculator",
+    "file": "screenshots/mobile-sample-size-calculator.png",
+    "exists": true,
+    "bytes": 266213
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "reference-generator",
+    "route": "/reference-generator",
+    "title": "Reference Generator",
+    "file": "screenshots/mobile-reference-generator.png",
+    "exists": true,
+    "bytes": 326577
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "research-opportunities",
+    "route": "/research-opportunities",
+    "title": "Research Opportunities",
+    "file": "screenshots/mobile-research-opportunities.png",
+    "exists": true,
+    "bytes": 223287
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "join-our-team",
+    "route": "/join-our-team",
+    "title": "Join Our Team",
+    "file": "screenshots/mobile-join-our-team.png",
+    "exists": true,
+    "bytes": 223270
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "about-us",
+    "route": "/about-us",
+    "title": "About Us",
+    "file": "screenshots/mobile-about-us.png",
+    "exists": true,
+    "bytes": 126442
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "contact-us",
+    "route": "/contact-us",
+    "title": "Contact Us",
+    "file": "screenshots/mobile-contact-us.png",
+    "exists": true,
+    "bytes": 127383
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "faq",
+    "route": "/faq",
+    "title": "FAQ",
+    "file": "screenshots/mobile-faq.png",
+    "exists": true,
+    "bytes": 113744
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "terms-of-use",
+    "route": "/terms-of-use",
+    "title": "Terms of Use",
+    "file": "screenshots/mobile-terms-of-use.png",
+    "exists": true,
+    "bytes": 243394
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "privacy-policy",
+    "route": "/privacy-policy",
+    "title": "Privacy Policy",
+    "file": "screenshots/mobile-privacy-policy.png",
+    "exists": true,
+    "bytes": 246032
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "cookie-policy",
+    "route": "/cookie-policy",
+    "title": "Cookie Policy",
+    "file": "screenshots/mobile-cookie-policy.png",
+    "exists": true,
+    "bytes": 246171
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "sign-in",
+    "route": "/sign-in",
+    "title": "Account Sign In",
+    "file": "screenshots/mobile-sign-in.png",
+    "exists": true,
+    "bytes": 71659
+  },
+  {
+    "viewport": "mobile",
+    "viewport_label": "Mobile 390 x 844",
+    "slug": "dashboard-login",
+    "route": "/dashboard/login",
+    "title": "Dashboard Login",
+    "file": "screenshots/mobile-dashboard-login.png",
+    "exists": true,
+    "bytes": 59774
+  }
+]

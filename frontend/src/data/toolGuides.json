@@ -1,0 +1,148 @@
+{
+  "/tools/sample-size-calculator": {
+    "name": "Sample Size Calculator",
+    "category": "EducationalApplication",
+    "free": true,
+    "summary": "Work out how many participants your study needs. Choose your study type and enter a few details about your study. ResRef selects the right calculation (Cochran's formula, G*Power-equivalent power analysis, Schoenfeld, Buderer or Riley, depending on the design), adjusts for your population size, response rate and dropout, and writes the sample size paragraph for your protocol in English or Arabic.",
+    "steps": [
+      "Choose your study type, for example a survey, a cross-sectional or prevalence study, a comparison between groups or a diagnostic accuracy study.",
+      "Enter a few details about your study, such as the expected percentage, the margin of error and the expected response or dropout rate.",
+      "Read the number of participants to recruit and copy the ready-written sample size paragraph for your protocol or manuscript."
+    ],
+    "features": [
+      "Surveys and questionnaires, prevalence studies and cross-sectional studies",
+      "Comparing percentages or averages between groups, and before–after studies",
+      "Time-to-event outcomes and non-inferiority comparisons",
+      "Diagnostic accuracy studies: sensitivity and specificity, or ROC curve (AUC)",
+      "Correlation and regression-based studies",
+      "Advanced options: power, significance level, allocation ratio, design effect and exact effect sizes"
+    ],
+    "faq": [
+      {
+        "q": "How do I calculate the sample size for a cross-sectional study?",
+        "a": "Choose Cross-sectional study, then enter the expected prevalence, the margin of error you can accept and your confidence level. The calculator applies Cochran's formula, adjusts for your population size and expected response rate, and shows how many people to recruit."
+      },
+      {
+        "q": "What should I enter if I don't know the expected percentage?",
+        "a": "Use 50%. It gives the largest sample size for a given margin of error, so your study stays large enough whatever the true percentage turns out to be. A value from a previous study or national data gives a more precise result."
+      },
+      {
+        "q": "Can I calculate the power for a sample size I already have?",
+        "a": "Yes. Open Advanced options to calculate the power, or the smallest effect you can detect, for a fixed number of participants."
+      },
+      {
+        "q": "Can I use the result in my thesis or protocol?",
+        "a": "Yes. Each result comes with a sample size paragraph in English or Arabic that names the method and the values you used, ready to adapt for your protocol, ethics application or manuscript."
+      }
+    ]
+  },
+  "/tools/reference-generator": {
+    "name": "Reference Generator",
+    "category": "EducationalApplication",
+    "free": true,
+    "summary": "Add references by DOI, PubMed ID, ISBN, link or title, keep them in lists, and copy a ready bibliography in your journal's style. Choose from 10 citation styles, including Vancouver, APA 7, MLA 9, Harvard and AMA. Work as a guest, or sign in to keep your lists on every device.",
+    "steps": [
+      "Paste a DOI, PubMed ID, ISBN, web link or article title, and ResRef finds the reference details for you.",
+      "Check the details, then keep the reference in a list for your paper or thesis.",
+      "Choose your journal's citation style and copy the formatted bibliography and in-text citations."
+    ],
+    "features": [
+      "10 citation styles: Vancouver, APA 7, MLA 9, Chicago (Author-Date), IEEE, Harvard, AMA, Turabian (Author-Date), ACS and Nature",
+      "Find references by DOI, PubMed ID, ISBN, link or title",
+      "BibTeX, RIS, PubMed and CSL JSON files",
+      "Reference lists, with warnings for possible duplicates",
+      "Works without an account; sign in to keep your lists on every device"
+    ],
+    "faq": [
+      {
+        "q": "How do I make a reference from a DOI?",
+        "a": "Paste the DOI into the Reference Generator. It finds the article's authors, title, journal, year and pages, and formats the reference in the citation style you choose."
+      },
+      {
+        "q": "Which citation styles are available?",
+        "a": "Vancouver, APA 7, MLA 9, Chicago (Author-Date), IEEE, Harvard, AMA, Turabian (Author-Date), ACS and Nature. Numbered styles such as Vancouver keep your list order; the others are sorted by author."
+      },
+      {
+        "q": "Do I need an account?",
+        "a": "No. You can work as a guest. Signing in to a ResRef account keeps your reference lists on every device."
+      },
+      {
+        "q": "Can I use my references in EndNote, Zotero or Mendeley?",
+        "a": "Yes. The Reference Generator works with BibTeX, RIS and CSL JSON files, which reference managers such as EndNote, Zotero and Mendeley can open."
+      }
+    ]
+  },
+  "/tools/journal-finder": {
+    "name": "Journal Finder",
+    "category": "EducationalApplication",
+    "free": true,
+    "summary": "Find the right journal for your manuscript. Enter your title, abstract and keywords, and ResRef scores journals on how well their subject areas match your work. Filter by quartile, open access, publication fee (APC), publisher, H-index and review time, then shortlist, compare and export the best options.",
+    "steps": [
+      "Enter your manuscript title, abstract and keywords. Adding the article type, study design and target audience improves the match.",
+      "Review the journals ranked by subject fit, and filter them by quartile, access, publication fee, publisher, H-index or time to decision.",
+      "Shortlist the journals you like, compare them side by side and download your list as a CSV file."
+    ],
+    "features": [
+      "Journals ranked by how well their subject areas and titles match your manuscript",
+      "Filters for quartile (Q1 to Q4), open access, diamond open access, publication fee (APC), publisher, H-index and review time",
+      "Case-report journals shown first when your article is a case report",
+      "Shortlist, compare and export to CSV"
+    ],
+    "faq": [
+      {
+        "q": "How does the Journal Finder choose journals?",
+        "a": "It scores each journal on how well its subject areas and title match your manuscript's title, abstract and keywords. The match percentage is relative to the best match for your manuscript."
+      },
+      {
+        "q": "Can I find open access journals with no publication fee?",
+        "a": "Yes. Use the Access filter for open access journals, and the Diamond OA and publication fee (APC) filters to find journals that do not charge authors."
+      },
+      {
+        "q": "What does Q1 mean?",
+        "a": "Journals are ranked within their subject field. Q1 journals are in the top 25% of their field, Q2 in the next 25%, and so on."
+      },
+      {
+        "q": "Where should I submit a case report?",
+        "a": "Choose Case report as the article type, or describe a case report in your abstract. Journals that publish case reports are then listed first."
+      }
+    ]
+  },
+  "/tools/research-analyzer": {
+    "name": "Research Analyzer",
+    "category": "EducationalApplication",
+    "free": false,
+    "summary": "Upload your research data, run the right statistical tests and get a structured analysis report in English or Arabic. ResRef suggests an analysis plan from the roles you give your variables, and reads CSV, Excel, SPSS, Stata and JSON files.",
+    "steps": [
+      "Upload your dataset: CSV, TSV, TXT, Excel (XLSX or XLS), SPSS (SAV, ZSAV or POR), Stata (DTA) or JSON.",
+      "Confirm each variable's type and role, and choose safe data-preparation options.",
+      "Run the suggested tests or pick your own, then generate a structured report in English or Arabic."
+    ],
+    "features": [
+      "Descriptive statistics",
+      "t-tests (independent and paired), ANOVA and chi-square tests",
+      "Mann–Whitney, Wilcoxon and Kruskal–Wallis tests",
+      "Pearson and Spearman correlation",
+      "Linear and logistic regression",
+      "Reliability with Cronbach's alpha",
+      "Analysis plan suggested from your variables' roles, and reports in English or Arabic"
+    ],
+    "faq": [
+      {
+        "q": "Which file types can I upload?",
+        "a": "CSV, TSV, TXT, Excel (XLSX and XLS), SPSS (SAV, ZSAV and POR), Stata (DTA) and JSON files."
+      },
+      {
+        "q": "Which statistical tests does it run?",
+        "a": "Descriptive statistics, independent and paired t-tests, ANOVA, chi-square, Mann–Whitney, Wilcoxon, Kruskal–Wallis, Pearson and Spearman correlation, linear and logistic regression, and Cronbach's alpha."
+      },
+      {
+        "q": "Is my data kept private?",
+        "a": "Your dataset is stored privately for your analysis session only and is never published. Sessions are removed after two hours without activity, or when you clear them."
+      },
+      {
+        "q": "Can I get the report in Arabic?",
+        "a": "Yes. The structured analysis report can be generated in English or Arabic."
+      }
+    ]
+  }
+}

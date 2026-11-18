@@ -1,0 +1,24 @@
+# Patterns without a leading "**/" only match at the build-context root, so
+# every secret / local-data pattern is written to match at any depth.
+.git
+.github
+.vscode
+**/.env
+**/.env.*
+!**/.env.example
+**/*.sqlite3
+**/*.sqlite3-journal
+**/.venv
+**/venv
+**/__pycache__
+**/*.pyc
+**/node_modules
+**/dist
+frontend/.vite
+backend/media
+backend/staticfiles
+backend/frontend_dist
+docs
+**/*.pdf
+*.md
+!README.md

@@ -1,0 +1,135 @@
+name: ResRef CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - resref-workspace
+      - main
+
+jobs:
+  backend:
+    name: Django checks and audit
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: resref_ci
+          POSTGRES_USER: resref_ci
+          POSTGRES_PASSWORD: resref_ci_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U resref_ci -d resref_ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    defaults:
+      run:
+        working-directory: backend
+    env:
+      DJANGO_SECRET_KEY: ci-only-secret-key-with-more-than-fifty-characters-2026
+      DJANGO_DEBUG: "false"
+      RESREF_ENV: development
+      DATABASE_URL: postgresql://resref_ci:resref_ci_password@127.0.0.1:5432/resref_ci
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: backend/.python-version
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+      - name: Install backend dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+      - name: Django system check
+        run: python manage.py check
+      - name: Migrations are up to date
+        run: python manage.py makemigrations --check --dry-run
+      - name: Verify PostgreSQL migration plan
+        run: python manage.py migrate --plan
+      - name: Deployment check (production settings)
+        env:
+          RESREF_ENV: production
+          DJANGO_DEBUG: "false"
+          SERVE_FRONTEND_FROM_DJANGO: "true"
+          PUBLIC_HOSTNAME: resref.example.com
+          FRONTEND_BASE_URL: https://resref.example.com
+          REDIS_URL: redis://redis.ci.internal:6379/0
+        run: python manage.py check --deploy --fail-level WARNING
+      - name: Django tests
+        run: python manage.py test core accounts dashboard blog research_analyzer usage redirects
+      - name: Python dependency audit
+        run: |
+          python -m pip install pip-audit
+          python -m pip_audit -r requirements.txt
+
+  frontend:
+    name: Frontend build and audit
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install frontend dependencies
+        run: npm ci
+      - name: Frontend dependency audit
+        run: npm audit --omit=dev --audit-level=moderate
+      - name: Lint
+        run: npm run lint
+      - name: Build frontend
+        run: npm run build
+
+  docker:
+    name: Docker image builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t resref:ci .
+
+  secret-scan:
+    name: Tracked-file secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure ripgrep is available
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v rg >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y ripgrep
+          fi
+          rg --version
+      - name: Scan for common committed secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v rg >/dev/null || { echo "ripgrep is required for the secret scan."; exit 1; }
+          pattern='\b(sk_(live|test)_[A-Za-z0-9]{16,}|rk_(live|test)_[A-Za-z0-9]{16,}|whsec_[A-Za-z0-9]{16,}|AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{35}|ghp_[A-Za-z0-9]{36})\b|-----BEGIN (RSA|DSA|EC|OPENSSH|PRIVATE) KEY-----'
+          if matches="$(rg --hidden --no-ignore --glob '!node_modules/**' --glob '!**/.venv/**' --glob '!.git/**' -n -I --pcre2 "$pattern" .)"; then
+            match_count=$(printf '%s\n' "$matches" | sed '/^$/d' | wc -l | tr -d ' ')
+          else
+            scan_status=$?
+            if [ "$scan_status" -ne 1 ]; then
+              echo "Secret scan failed to execute (ripgrep exit ${scan_status})."
+              exit "$scan_status"
+            fi
+            matches=''
+            match_count=0
+          fi
+          echo "Secret scan completed: ${match_count} match(es)."
+          if [ "$match_count" -gt 0 ]; then
+            printf '%s\n' "$matches"
+            echo "Potential secret material found in the working tree."
+            exit 1
+          fi

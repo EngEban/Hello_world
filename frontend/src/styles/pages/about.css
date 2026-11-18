@@ -1,0 +1,66 @@
+/* About ResRef page (/about). Builds on brand-ui.css. */
+
+/* Identity: editorial copy beside a framed photo */
+.rp-about-identity-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(40px, 6vw, 88px); align-items: center; }
+.rp-about-identity-copy { display: grid; gap: 22px; }
+.resref-page .rp-about-body { margin: 0; max-width: 640px; color: var(--rh-copy); font-size: 1.02rem; line-height: 1.75; }
+.rp-about-metrics { margin-top: 8px; }
+.rp-about-metrics .rh-stat-tile { border-color: var(--rh-line); background: #fff; box-shadow: var(--rh-shadow-sm); }
+.rp-about-metrics .rh-stat-tile small { color: var(--rh-blue); }
+
+.rp-about-visual { position: relative; }
+.rp-about-media { z-index: 1; aspect-ratio: 4 / 4.4; background: var(--rh-ice); }
+.rp-about-media .rh-media-caption { left: 20px; right: 20px; bottom: 20px; }
+
+/* Mission band with principles as numbered steps */
+.rp-about-mission-panel { align-items: start; }
+.rp-about-mission-copy { display: grid; gap: 18px; justify-items: start; }
+.rp-about-mission-icon { width: 56px; height: 56px; display: grid; place-items: center; border-radius: var(--rr-radius-card); background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .2); color: var(--rh-sky); }
+.resref-page .rp-about-mission-copy h2 { margin: 0; color: #fff; font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.6rem); line-height: 1.14; text-wrap: balance; }
+.resref-page .rp-about-mission-copy p { margin: 0; max-width: 560px; }
+.rp-about-principles { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.rp-about-principle { display: flex; gap: 18px; align-items: flex-start; padding: 22px 24px; border: 1px solid rgba(255, 255, 255, .16); border-radius: var(--rh-radius); background: linear-gradient(135deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .03)); backdrop-filter: blur(6px); transition: background .3s ease, border-color .3s ease, transform .3s var(--rh-ease); }
+.rp-about-principle:hover { border-color: rgba(255, 255, 255, .32); background: linear-gradient(135deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, .05)); transform: translateX(4px); }
+.rp-about-principle .rh-step-number { background: #fff; color: var(--rh-navy); box-shadow: 0 8px 20px rgba(0, 10, 40, .25); }
+.resref-page .rp-about-principle h3 { margin: 0 0 6px; color: #fff; font: 400 1.24rem/1.25 var(--rh-serif); }
+.resref-page .rp-about-principle p { margin: 0; color: rgba(234, 245, 255, .82); font-size: .98rem; line-height: 1.6; }
+
+/* Audiences */
+.rp-about-audience-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.rp-about-audience-card { padding: 32px; }
+
+/* Trust CTA */
+.rp-about-trust { padding-top: clamp(24px, 3vw, 40px); }
+.rp-about-trust .rh-cta-band-copy > div { display: grid; gap: 12px; }
+.resref-page .rp-about-trust .rh-cta-band h2 { margin: 0; max-width: 620px; }
+
+/* The photo takes the text column's height, so both start and end together. */
+@media (min-width: 1025px) {
+  .rp-about-identity-layout { align-items: stretch; }
+  .rp-about-visual { display: grid; }
+  .rp-about-media { aspect-ratio: auto; min-height: 360px; }
+  .rp-about-media img { position: absolute; inset: 0; }
+}
+
+@media (max-width: 1024px) {
+  .rp-about-identity-layout { grid-template-columns: 1fr; }
+  .rp-about-visual { max-width: 620px; width: 100%; justify-self: center; }
+  .rp-about-media { aspect-ratio: 16 / 12; }
+  .rp-about-audience-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rp-about-audience-grid > :last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 680px) {
+  .rp-about-metrics { grid-template-columns: 1fr; }
+  .rp-about-metrics .rh-stat-tile { grid-template-columns: 96px minmax(0, 1fr); align-items: baseline; gap: 12px; }
+  .rp-about-media { aspect-ratio: 4 / 4.6; border-radius: var(--rr-radius-panel); }
+  .rp-about-media .rh-media-caption { left: 12px; right: 12px; bottom: 12px; padding: 14px; }
+  .rp-about-principle { padding: 18px; gap: 14px; }
+  .rp-about-audience-grid { grid-template-columns: 1fr; }
+  .rp-about-audience-grid > :last-child { grid-column: auto; }
+  .rp-about-audience-card { padding: 24px; }
+  .rp-about-trust .rh-actions { width: 100%; }
+  .rp-about-trust .rh-actions .rh-button { flex: 1 1 100%; }
+}
+
+.resref-page .rp-about .rh-card h3 { font-family: var(--rh-serif); font-weight: 400; color: var(--rh-ink); }

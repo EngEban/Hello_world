@@ -1,0 +1,36 @@
+/* Research tools hub (/tools) */
+.rp-tools-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.rp-tools-card { gap: 16px; padding: clamp(26px, 3vw, 38px); color: var(--rh-ink); text-decoration: none; }
+.rp-tools-card:hover { color: var(--rh-ink); }
+.rp-tools-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.rp-tools-card-icon { width: 58px; height: 58px; border-radius: var(--rr-radius-card); }
+.rp-tools-card-index { position: absolute; right: 26px; bottom: 18px; z-index: -1; color: var(--rh-ice); font: 400 clamp(4rem, 3rem + 3vw, 6rem)/1 var(--rh-serif); letter-spacing: -.04em; pointer-events: none; transition: color .35s ease; }
+.rp-tools-card:hover .rp-tools-card-index { color: rgba(79, 185, 252, .18); }
+.resref-page .rp-tools-card h2 { margin: 6px 0 0; color: var(--rh-ink); font: 400 clamp(1.5rem, 1.3rem + .6vw, 1.85rem)/1.15 var(--rh-serif); letter-spacing: -.01em; }
+.rp-tools-card p { max-width: 48ch; margin: 0; color: var(--rh-copy); line-height: 1.7; }
+.rp-tools-card-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 10px; color: var(--rh-blue); font: 700 .95rem/1.2 var(--rh-sans); }
+.rp-tools-card-cta svg { transition: transform .25s var(--rh-ease); }
+.rp-tools-card:hover .rp-tools-card-cta svg { transform: translateX(4px); }
+.rp-tools-card:focus-visible { outline: 3px solid var(--rh-sky); outline-offset: 4px; }
+.rp-tools-card-muted { background: var(--rh-mist); box-shadow: none; }
+.rp-tools-card-muted .rp-tools-card-cta { color: var(--rh-copy); }
+
+.rp-tools-workflow-layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr); gap: 32px 64px; align-items: center; }
+.rp-tools-workflow .rh-intro h2 { font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.6rem); }
+.rp-tools-steps { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 0; padding: 0; list-style: none; counter-reset: none; }
+.rp-tools-steps::before { content: ''; position: absolute; top: 44px; left: 12%; right: 12%; height: 2px; background: var(--rh-blue); opacity: .25; }
+.rp-tools-step { position: relative; display: grid; gap: 16px; align-content: start; padding: 24px; border: 1px solid var(--rh-line); border-radius: var(--rh-radius); background: #fff; box-shadow: var(--rh-shadow-sm); }
+.rp-tools-step strong { display: block; margin-bottom: 6px; color: var(--rh-ink); font: 400 1.3rem/1.2 var(--rh-serif); }
+.rp-tools-step p { margin: 0; color: var(--rh-copy); line-height: 1.6; font-size: .96rem; }
+
+.rp-tools-cta { padding-top: clamp(48px, 6vw, 80px); }
+
+@media (max-width: 1024px) {
+  .rp-tools-workflow-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .rp-tools-grid { grid-template-columns: 1fr; }
+  .rp-tools-steps { grid-template-columns: 1fr; }
+  .rp-tools-steps::before { top: 24px; bottom: 24px; left: 44px; right: auto; width: 2px; height: auto; background: var(--rh-blue); }
+  .rp-tools-step { grid-template-columns: auto minmax(0, 1fr); align-items: start; padding: 20px; }
+}

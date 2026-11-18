@@ -1,0 +1,53 @@
+/* Expert consultation page (/consultation). Builds on brand-ui.css and public-forms.css. */
+
+/* Overview: benefit checklist beside a framed visual */
+.rp-consult-overview-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 88px); align-items: center; }
+.rp-consult-overview-copy { display: grid; gap: 28px; }
+.rp-consult-proof { gap: 12px; }
+.resref-page .rp-consult-proof li { align-items: center; padding: 14px 18px; border: 1px solid var(--rh-line); border-radius: var(--rr-radius-card); background: #fff; box-shadow: var(--rh-shadow-sm); color: var(--rh-ink); font-weight: 500; }
+.rp-consult-proof li svg { margin-top: 0; }
+
+.rp-consult-visual { position: relative; padding: 28px 28px 0 0; }
+.rp-consult-visual::before { content: ''; position: absolute; inset: 0 0 28px 28px; border-radius: var(--rh-radius-lg); background: var(--rh-gradient); opacity: .9; }
+.rp-consult-media { z-index: 1; aspect-ratio: 5 / 4.4; background: var(--rh-ice); }
+.rp-consult-media .rh-media-caption { left: 20px; right: 20px; bottom: 20px; }
+.rh-media-caption .rp-consult-caption-note { margin: 4px 0 0; color: rgba(226, 240, 255, .82); font: 400 .88rem/1.4 var(--rh-sans); letter-spacing: 0; text-transform: none; }
+
+/* Process */
+.rp-consult-process-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(36px, 6vw, 88px); align-items: start; }
+.rp-consult-process-lead { display: grid; gap: 28px; position: sticky; top: 120px; }
+.rp-consult-assurance { display: flex; gap: 14px; align-items: flex-start; padding: 20px 22px; border: 1px solid rgba(18, 106, 198, .18); border-left: 4px solid var(--rh-blue); border-radius: var(--rr-radius-card); background: var(--rh-mist); color: var(--rh-copy); line-height: 1.6; }
+.rp-consult-assurance svg { flex: none; color: var(--rh-blue); }
+.rp-consult-steps { margin: 0; padding: 0; list-style: none; }
+
+/* Request: navy panel with what to prepare beside the ways to get in touch */
+.rp-consult-request { scroll-margin-top: 90px; }
+.rp-consult-request-panel { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: clamp(28px, 3.6vw, 48px); border-radius: var(--rh-radius-lg); color: #fff; background: radial-gradient(80% 70% at 100% 0%, rgba(79, 185, 252, .32), transparent 60%), radial-gradient(70% 70% at 0% 100%, rgba(18, 106, 198, .5), transparent 65%), var(--rh-navy); box-shadow: var(--rh-shadow-lg); }
+.rp-consult-request-panel::before { content: ''; position: absolute; inset: 0; z-index: -1; background-image: radial-gradient(rgba(255, 255, 255, .1) 1px, transparent 1.2px); background-size: 24px 24px; mask-image: radial-gradient(ellipse at 80% 20%, #000, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at 80% 20%, #000, transparent 70%); }
+.rp-consult-request-icon { width: 56px; height: 56px; display: grid; place-items: center; border-radius: var(--rr-radius-card); background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .2); color: var(--rh-sky); }
+.resref-page .rp-consult-request-panel h2 { margin: 0; color: #fff; font-size: clamp(1.8rem, 1.3rem + 1.5vw, 2.5rem); line-height: 1.12; }
+.resref-page .rp-consult-request-panel p { margin: 0; color: rgba(234, 245, 255, .86); line-height: 1.7; }
+.rp-consult-request-list { display: grid; gap: 10px; margin: 4px 0 0; padding: 0; list-style: none; }
+.resref-page .rp-consult-request-list li { display: flex; gap: 10px; align-items: flex-start; color: #fff; line-height: 1.5; }
+.rp-consult-request-list svg { flex: none; margin-top: 2px; color: var(--rh-sky); }
+
+.resref-page .rp-consult-request-panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, auto); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.rp-consult-request-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; min-width: 0; }
+.rp-consult-request-actions { display: grid; gap: 16px; justify-items: stretch; min-width: 0; }
+.rp-consult-request-actions > .rh-button { justify-content: center; width: 100%; }
+
+@media (max-width: 1024px) {
+  .rp-consult-overview-layout, .rp-consult-process-layout, .resref-page .rp-consult-request-panel { grid-template-columns: 1fr; }
+  .rp-consult-visual { max-width: 640px; width: 100%; justify-self: center; }
+  .rp-consult-process-lead { position: static; }
+}
+
+@media (max-width: 680px) {
+  .rp-consult-visual { padding: 16px 16px 0 0; }
+  .rp-consult-visual::before { inset: 0 0 16px 16px; border-radius: var(--rr-radius-panel); }
+  .rp-consult-media { aspect-ratio: 4 / 4.2; border-radius: var(--rr-radius-panel); }
+  .rp-consult-media .rh-media-caption { left: 12px; right: 12px; bottom: 12px; padding: 14px; }
+  .rp-consult-request-panel { padding: 26px 20px; border-radius: var(--rr-radius-panel); }
+}
+
+.resref-page .rp-consult .rh-card h3 { font-family: var(--rh-serif); font-weight: 400; color: var(--rh-ink); }
